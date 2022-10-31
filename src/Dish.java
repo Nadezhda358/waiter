@@ -10,11 +10,6 @@ public class Dish extends MenuItem{
 
     @Override
     public String toString() {
-        return "Dish{" +
-                "dishType=" + dishType +
-                ", weightInGrams=" + weightInGrams +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return this.name+ " ("+this.weightInGrams+" g) - "+this.price+" lv.";
     }
 }
