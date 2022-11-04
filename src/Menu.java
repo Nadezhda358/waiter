@@ -2,21 +2,20 @@ import java.io.File;
 import java.util.*;
 
 public class Menu {
-private HashMap<DishType,ArrayList<MenuItem>> menuItems;
+private EnumMap<DishType,ArrayList<MenuItem>> menuItems;
 
     public Menu() {
-        this.menuItems = new HashMap<DishType ,ArrayList<MenuItem>>();
-
+        this.menuItems = new EnumMap<DishType ,ArrayList<MenuItem>>(DishType.class);
     }
 
-    public HashMap<DishType,ArrayList<MenuItem>> getMenuItems() {
+    public EnumMap<DishType,ArrayList<MenuItem>> getMenuItems() {
         return this.menuItems;
     }
 
     public Menu(String fileName) {
         //ArrayList<MenuItem> menuItems = new ArrayList<>();
         List<MenuItem> menuItems = new ArrayList<>();
-        this.menuItems = new HashMap<DishType,ArrayList<MenuItem>>();
+        this.menuItems = new EnumMap<DishType,ArrayList<MenuItem>>(DishType.class);
         try {
             File menuItemsFile = new File(fileName);
             Scanner fileReader = new Scanner(menuItemsFile, "windows-1251");
@@ -36,16 +35,20 @@ private HashMap<DishType,ArrayList<MenuItem>> menuItems;
         }
     }
     public void printMenu(){
-        for (Map.Entry<DishType,ArrayList<MenuItem>> item:this.menuItems.entrySet() ) {
+        for (Map.Entry<DishType,ArrayList<MenuItem>> m : this.menuItems.entrySet()) {
 
-            System.out.println(item.toString());
+            System.out.println(m.getKey());
+            for (int i = 0; i < m.getValue().size(); i++) {
+                System.out.println((i+1)+". "+m.getValue().get(i));
+            }
+
         }
     }
 
     @Override
     public String toString() {
-        return "Menu{" +
-                "menuItems=" + menuItems +
+        return "MENU\n" +
+                this.menuItems.keySet()+"\n" + this.menuItems +
                 '}';
     }
 }
