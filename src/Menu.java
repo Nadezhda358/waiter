@@ -35,9 +35,10 @@ private EnumMap<DishType,ArrayList<MenuItem>> menuItems;
         }
     }
     public void printMenu(){
+        System.out.println("------ M E N U ------\nDISHES");
         for (Map.Entry<DishType,ArrayList<MenuItem>> m : this.menuItems.entrySet()) {
 
-            System.out.println(m.getKey());
+            System.out.println(m.getKey()+"S");
             for (int i = 0; i < m.getValue().size(); i++) {
                 System.out.println((i+1)+". "+m.getValue().get(i));
             }
