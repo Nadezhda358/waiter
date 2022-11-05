@@ -29,8 +29,8 @@ public class Menu {
                 this.dishItems.computeIfAbsent(type, k -> new ArrayList<>()).add(menuItem);
                 menuRow = fileReader.nextLine();
             }
-            menuRow = fileReader.nextLine();
             while (fileReader.hasNextLine()) {
+                menuRow = fileReader.nextLine();
                 String[] line = menuRow.split(",");
                 DrinkType type = DrinkType.valueOf(line[0]);
                 String name = line[1];
@@ -38,7 +38,6 @@ public class Menu {
                 int volumeMl = Integer.parseInt(line[3]);
                 MenuItem menuItem = new Drink(name, price, type, volumeMl);
                 this.drinkItems.computeIfAbsent(type, k -> new ArrayList<>()).add(menuItem);
-                menuRow = fileReader.nextLine();
             }
             fileReader.close();
 
