@@ -22,20 +22,20 @@ public class Menu {
             while (!menuRow.equals("Drinks")) {
                 String[] line = menuRow.split(",");
                 DishType type = DishType.valueOf(line[0]);
+                String name = line[1];
                 double price = Double.parseDouble(line[2]);
                 int weight = Integer.parseInt(line[3]);
-                String name = line[1];
                 MenuItem menuItem = new Dish(name, price, type, weight);
                 this.dishItems.computeIfAbsent(type, k -> new ArrayList<>()).add(menuItem);
                 menuRow = fileReader.nextLine();
             }
             menuRow = fileReader.nextLine();
-            while (menuRow != null) {
+            while (fileReader.hasNextLine()) {
                 String[] line = menuRow.split(",");
                 DrinkType type = DrinkType.valueOf(line[0]);
+                String name = line[1];
                 double price = Double.parseDouble(line[2]);
                 int volumeMl = Integer.parseInt(line[3]);
-                String name = line[1];
                 MenuItem menuItem = new Drink(name, price, type, volumeMl);
                 this.drinkItems.computeIfAbsent(type, k -> new ArrayList<>()).add(menuItem);
                 menuRow = fileReader.nextLine();
@@ -48,7 +48,7 @@ public class Menu {
     }
 
     public void printMenu() {
-        System.out.println("-------- M E N U --------\n\n***** DISHES *****");
+        System.out.println("\n-------- M E N U --------\n\n***** DISHES *****");
         for (Map.Entry<DishType, ArrayList<MenuItem>> m : this.dishItems.entrySet()) {
             System.out.println("\t"+m.getKey() + "S");
 

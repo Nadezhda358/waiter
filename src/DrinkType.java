@@ -1,6 +1,6 @@
 public enum DrinkType {
     HOT,
-    NON_ALCOHOLIC,
+    NONALCOHOLIC,
     ALCOHOLIC,
     COCKTAIL
 }
