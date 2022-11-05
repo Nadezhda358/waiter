@@ -4,6 +4,5 @@ public class Main {
         String fileName = "Menu.csv";
         Menu menu = new Menu(fileName);
         menu.printMenu();
-
     }
 }
