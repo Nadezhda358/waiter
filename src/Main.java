@@ -14,8 +14,7 @@ public class Main {
         newOrder.addOrderedItem(newOrderItem1);
         newOrder.addOrderedItem(newOrderItem2);
         newOrder.printOrder();
-
-
-
+        newOrder.setOrderAsTaken();
+        newOrder.printOrder();
     }
 }
