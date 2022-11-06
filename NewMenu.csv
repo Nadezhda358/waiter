@@ -1,6 +1,6 @@
 SOUP,Chicken soup,1.99,350
-SOUP,Shkembe chorba,2.5,400
 SOUP,Tarator,1.75,350
+SOUP,Tomato soup,2.55,450
 SALAD,Shopska salad,6.25,400
 SALAD,Village salad,5.0,450
 GRILL,Chicken wings,6.0,250
@@ -12,9 +12,9 @@ Drinks
 HOT,Long coffee,2.2,120
 HOT,Normal coffee,2.2,60
 HOT,Tea,1.9,200
-NONALCOHOLIC,Capy,3.0,300
 NONALCOHOLIC,Cola,2.6,250
 NONALCOHOLIC,Fanta,2.6,250
+NONALCOHOLIC,Låmonade,1.99,450
 ALCOHOLIC,Beer Shumen,2.0,330
 ALCOHOLIC,Beer Shumen,3.0,500
 ALCOHOLIC,Rakiya Burgas 63,4.4,50

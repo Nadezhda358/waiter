@@ -8,6 +8,22 @@ public class Dish extends MenuItem{
         this.weightInGrams = weightInGrams;
     }
 
+    public DishType getDishType() {
+        return dishType;
+    }
+
+    public void setDishType(DishType dishType) {
+        this.dishType = dishType;
+    }
+
+    public int getWeightInGrams() {
+        return weightInGrams;
+    }
+
+    public void setWeightInGrams(int weightInGrams) {
+        this.weightInGrams = weightInGrams;
+    }
+
     @Override
     public String toString() {
         return this.name+ " ("+this.weightInGrams+" g) - "+this.price+" lv.";
