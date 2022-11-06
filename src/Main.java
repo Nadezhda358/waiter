@@ -4,28 +4,18 @@ public class Main {
         String fileName = "Menu.csv";
         Menu menu = new Menu(fileName);
         menu.printMenu();
-        //Checks deleteDishItem() and deleteDrinkItem() do works
+
         Dish d = menu.getDishItems().get(DishType.SOUP).get(1);
-        System.out.println(d);
-        menu.deleteDishItem(d);
         Drink d1 = menu.getDrinkItems().get(DrinkType.NONALCOHOLIC).get(0);
-        System.out.println(d1);
-        menu.deleteDrinkItem(d1);
 
-        //Checks addDishItem(), addDrinkItem(), sortMenuItems() and saveMenuToFile() do works
-        Dish newDish = new Dish("Tomato soup", 2.55, DishType.SOUP, 450);
-        System.out.println(newDish);
-        menu.addDishItem(newDish);
-        Drink newDrink = new Drink("Låmonade", 1.99, DrinkType.NONALCOHOLIC, 450);
-        System.out.println(newDrink);
-        menu.addDrinkItem(newDrink);
-        menu.sortMenuItems();
-        menu.printMenu();
+        Order newOrder = new Order();
+        OrderItem newOrderItem1 = new OrderItem(d,2);
+        OrderItem newOrderItem2 = new OrderItem(d1,1);
+        newOrder.addOrderedItem(newOrderItem1);
+        newOrder.addOrderedItem(newOrderItem2);
+        newOrder.printOrder();
 
-        try {
-            menu.saveMenuToFile("NewMenu.csv");
-        }catch (Exception e){
-            System.out.println("File not found!");
-        }
+
+
     }
 }
