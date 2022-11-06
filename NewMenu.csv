@@ -1,0 +1,23 @@
+SOUP,Chicken soup,1.99,350
+SOUP,Tarator,1.75,350
+SOUP,Tomato soup,2.55,450
+SALAD,Shopska salad,6.25,400
+SALAD,Village salad,5.0,450
+GRILL,Chicken wings,6.0,250
+GRILL,Kebabche,2.0,110
+GRILL,Kyufte,2.2,100
+DESSERT,Melba,3.0,190
+DESSERT,Torta,2.5,200
+Drinks
+HOT,Long coffee,2.2,120
+HOT,Normal coffee,2.2,60
+HOT,Tea,1.9,200
+NONALCOHOLIC,Cola,2.6,250
+NONALCOHOLIC,Fanta,2.6,250
+NONALCOHOLIC,Låmonade,1.99,450
+ALCOHOLIC,Beer Shumen,2.0,330
+ALCOHOLIC,Beer Shumen,3.0,500
+ALCOHOLIC,Rakiya Burgas 63,4.4,50
+ALCOHOLIC,Rakiya Peshtera,3.2,50
+ALCOHOLIC,Vodka Stolichna,3.0,50
+COCKTAIL,Bloody Mary,4.0,200
