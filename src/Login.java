@@ -56,7 +56,7 @@ public class Login {
                         DisplayWaiter.printWaiterMenu();
                     }else if (Role.COOK.toString().equalsIgnoreCase(splitUserInfo[2])){
                         System.out.println("You logged in successfully.");
-                        //TODO cook display
+                        DisplayCook.printCookMenu();
                     }
                     doesUserExist = true;
                 }

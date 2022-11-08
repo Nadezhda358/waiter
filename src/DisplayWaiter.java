@@ -12,11 +12,11 @@ public class DisplayWaiter {
                 menu.printMenu();
                 editMenu();
                 break;
-            case 2://--- TODO ----> print active orders
+            case 2://TODO print active orders
                 editOrders();
                 break;
             case 3:
-                Login.printStartMenu();
+                Login.printStartMenu();break;
             default:
                 System.out.println("Invalid input. Try again.\n");
                 printWaiterMenu();
@@ -50,10 +50,10 @@ public class DisplayWaiter {
         System.out.print("Enter your choice(1-4): ");
         int choice = scan.nextInt();
         switch (choice){
-            case 1:editOrders(); break;//--- TODO ----> method that adds order
-            case 2:editOrders(); break;//--- TODO ----> method that removes order
-            case 3:editOrders(); break;//--- TODO ----> method that prints current bill
-            case 4:editOrders(); break;//--- TODO ----> method that changes the status of the order
+            case 1:editOrders(); break;//TODO method that adds order
+            case 2:editOrders(); break;//TODO method that removes order
+            case 3:editOrders(); break;//TODO method that prints current bill
+            case 4:editOrders(); break;//TODO method that changes the status of the order
             case 5:
                 System.out.println();
                 printWaiterMenu(); break;
