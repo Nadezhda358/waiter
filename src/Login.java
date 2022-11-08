@@ -53,7 +53,7 @@ public class Login {
                 if (line.equalsIgnoreCase(userInfo)){
                     if (Role.WAITER.toString().equalsIgnoreCase(splitUserInfo[2])){
                         System.out.println("You logged in successfully.");
-                        //TODO cook display
+                        DisplayWaiter.printWaiterMenu();
                     }else if (Role.COOK.toString().equalsIgnoreCase(splitUserInfo[2])){
                         System.out.println("You logged in successfully.");
                         //TODO cook display
