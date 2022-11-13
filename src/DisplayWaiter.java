@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class DisplayWaiter {
     public static void printWaiterMenu(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("1. Menu\n2. Active orders\n3. Back");
+        System.out.println("1. Menu\n2. Orders\n3. Back");
         System.out.print("Enter your choice(1-3): ");
         int choice = scan.nextInt();
         switch (choice){
@@ -24,18 +24,19 @@ public class DisplayWaiter {
     }
     public static void editMenu() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("\n1.1 add item\n1.2 remove item\n1.3 back");
+        System.out.println("\n1.1 add new order\n1.2 add item\n1.3 remove item\n1.4 back");
         System.out.print("Enter your choice(1-3): ");
         int choice = scan.nextInt();
         switch (choice) {
-            case 1://TODO method that adds item to the menu
-                editMenu();
-                break;
+            case 1:
             case 2:
-                //TODO method that removes item to the menu
                 editMenu();
                 break;
             case 3:
+                //TODO method that removes item to the menu
+                editMenu();
+                break;
+            case 4:
                 System.out.println();
                 printWaiterMenu();
                 break;
