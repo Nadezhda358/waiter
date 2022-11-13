@@ -123,9 +123,14 @@ public class Menu {
         this.drinkItems.get(drinkToDelete.getDrinkType()).remove(drinkToDelete);
     }
 
-    public void saveMenuToFile(String fileName) throws FileNotFoundException {
+    public void saveMenuToFile(String fileName){
         this.sortMenuItems();
-        PrintStream fileWriter = new PrintStream(fileName);
+        PrintStream fileWriter = null;
+        try {
+            fileWriter = new PrintStream(fileName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
             for (int i = 0; i < dishItem.getValue().size(); i++) {
                 fileWriter.println(dishItem.getKey() + ","
