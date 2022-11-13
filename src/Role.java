@@ -1,4 +1,4 @@
 public enum Role {
-    cook,
-    waiter
+    COOK,
+    WAITER
 }
