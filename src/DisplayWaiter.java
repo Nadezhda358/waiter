@@ -15,7 +15,7 @@ public class DisplayWaiter {
                 break;
             case 2:
                 restaurant.orderList.PrintOrderList();
-                editOrders();
+                printOrdersMenu();
                 break;
             case 3:
                 Login.printStartMenu();break;
@@ -27,7 +27,7 @@ public class DisplayWaiter {
     public static void editMenu(Menu menu){
         Scanner scan = new Scanner(System.in);
         System.out.println("\n1.1 add new dish\n1.2 add new drink\n1.3 remove item\n1.4 back");
-        System.out.print("Enter your choice(1-3): ");
+        System.out.print("Enter your choice(1-4): ");
         int choice = scan.nextInt();
         switch (choice) {
             case 1:
@@ -78,21 +78,36 @@ public class DisplayWaiter {
         int ml = scan.nextInt();
         return new Drink(name, price, DrinkType.valueOf(drinkType.toUpperCase()), ml);
     }
-    public static void editOrders(){
+    public static void printOrdersMenu(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("\n2.1 add order\n2.2 edit order\n2.3 current bill for order\n2.4 back");
-        System.out.print("Enter your choice(1-4): ");
+        System.out.println("\n2.1 add order\n2.2 edit order\n2.3 back");
+        System.out.print("Enter your choice(1-3): ");
         int choice = scan.nextInt();
         switch (choice){
-            case 1:editOrders(); break;//TODO method that adds order
-            case 2:editOrders(); break;//TODO method that removes order
-            case 3:editOrders(); break;//TODO method that prints current bill
-            case 4:
+            case 1:printOrdersMenu(); break;//TODO method that adds order
+            case 2:editOrder(); printOrdersMenu(); break;//TODO chose a table, check if it has an order and print the menu for editing it
+            case 3:
                 System.out.println();
                 printWaiterMenu(); break;
             default:
                 System.out.println("Invalid input. Try again.\n");
-                editOrders();
+                printOrdersMenu();
+        }
+    }
+    public static void editOrder(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n1 add dish to order\n2 add drink to order\n3 serve order\n4 playing the bill\n5 back");
+        System.out.print("Enter your choice(1-3): ");
+        int choice = scan.nextInt();
+        switch (choice){
+            case 1:break;
+            case 2:break;
+            case 3:break;
+            case 4:break;
+            case 5:printOrdersMenu();break;
+        default:
+                System.out.println("Invalid input. Try again.\n");
+                editOrder();
         }
     }
 }
