@@ -11,7 +11,9 @@ public class Order {
     public void setDateOfOrder(LocalDateTime dateOfOrder) {
         this.dateOfOrder = dateOfOrder;
     }
-
+    public void setStatusServed() {
+        this.status = OrderStatus.SERVED;
+    }
     public Order(int tableNumber) {
         this.tableNumber = tableNumber;
         this.orderedItems = new ArrayList<>();
@@ -19,8 +21,38 @@ public class Order {
         this.status = OrderStatus.PAYED;
     }
 
+    public List<OrderItem> getOrderedItems() {
+        return orderedItems;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public LocalDateTime getDateOfOrder() {
+        return dateOfOrder;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
     public void addOrderedItem(OrderItem orderItem){
-        this.orderedItems.add(orderItem);
+        boolean isOrderItemExist = false;
+        for (OrderItem item: this.orderedItems) {
+            if (item.getItem() == orderItem.getItem()) {
+                item.setCount(item.getCount()+orderItem.getCount());
+                isOrderItemExist = true;
+                break;
+            }
+        }
+        if (!isOrderItemExist) {
+            this.orderedItems.add(orderItem);
+        }
 
     }
     public void printOrder(){
