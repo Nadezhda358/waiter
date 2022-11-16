@@ -72,24 +72,26 @@ public class Menu {
 
     public void printDrinkItems() {
         System.out.println("\n***** DRINKS *****");
-
+        int currentNum = 0;
         for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
             System.out.println("\t" + drinkItem.getKey() + " DRINKS");
 
             for (int i = 0; i < drinkItem.getValue().size(); i++) {
-                System.out.println((i + 1) + ". " + drinkItem.getValue().get(i));
+                currentNum++;
+                System.out.println(currentNum + ". " + drinkItem.getValue().get(i));
             }
         }
     }
 
     public void printDishItems() {
         System.out.println("\n***** DISHES *****");
-
+        int currentNum = 0;
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
             System.out.println("\t" + dishItem.getKey() + "S");
 
             for (int i = 0; i < dishItem.getValue().size(); i++) {
-                System.out.println((i + 1) + ". " + dishItem.getValue().get(i));
+                currentNum++;
+                System.out.println((currentNum) + ". " + dishItem.getValue().get(i));
             }
         }
     }
@@ -115,12 +117,43 @@ public class Menu {
         this.drinkItems.computeIfAbsent(drinkToAdd.getDrinkType(), k -> new ArrayList<>()).add(drinkToAdd);
     }
 
-    public void deleteDishItem(Dish dishToDelete) {
+    public void deleteDishItemByNumber(int dishNumber) {
+        Dish dishToDelete = getDishItemByNumber(dishNumber);
         this.dishItems.get(dishToDelete.getDishType()).remove(dishToDelete);
     }
+    public Dish getDishItemByNumber(int dishNumber) {
+        int currentNum = 0;
+        for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
+            //System.out.println("\t" + dishItem.getKey() + "S");
 
-    public void deleteDrinkItem(Drink drinkToDelete) {
+            for (int i = 0; i < dishItem.getValue().size(); i++) {
+                currentNum++;
+                if (currentNum == dishNumber) {
+                    return dishItem.getValue().get(i);
+                }
+            }
+
+        }
+        return null;
+    }
+
+    public void deleteDrinkItemByNumber(int drinkNumber) {
+        Drink drinkToDelete = getDrinkItemByNumber(drinkNumber);
         this.drinkItems.get(drinkToDelete.getDrinkType()).remove(drinkToDelete);
+    }
+    public Drink getDrinkItemByNumber(int drinkNumber) {
+        int currentNum = 0;
+        for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
+            //System.out.println("\t" + dishItem.getKey() + "S");
+
+            for (int i = 0; i < drinkItem.getValue().size(); i++) {
+                currentNum++;
+                if (currentNum == drinkNumber) {
+                    return drinkItem.getValue().get(i);
+                }
+            }
+        }
+        return null;
     }
 
     public void saveMenuToFile(String fileName){
