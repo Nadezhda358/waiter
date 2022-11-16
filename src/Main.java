@@ -5,33 +5,23 @@ public class Main {
 
         Restaurant restaurant = new Restaurant();
         restaurant.menu.printMenu();
-        restaurant.orderList.PrintOrderList();
 
-        //Testing if order in table not exists
-        int tableNumber =1;
-        Dish d = restaurant.menu.getDishItems().get(DishType.SOUP).get(1);
-        Drink d1 = restaurant.menu.getDrinkItems().get(DrinkType.NONALCOHOLIC).get(0);
 
-        Order currentOrder = restaurant.orderList.orders.get(tableNumber-1);
-        if (currentOrder.getStatus()==OrderStatus.PAYED){
-            currentOrder.setStatus(OrderStatus.TAKING);
-        }
-        currentOrder.addOrderedItem(new OrderItem(d,2));
-        currentOrder.addOrderedItem(new OrderItem(d1,1));
-        currentOrder.addOrderedItem(new OrderItem(d1,1));
+        //How to get Dish by number in Dish menu
+        Dish seventhDish = restaurant.menu.getDishItemByNumber(7);
+        System.out.println(seventhDish);
 
-        //Testing if order in table exists
-        tableNumber =3;
-        currentOrder = restaurant.orderList.orders.get(tableNumber-1);
-        if (currentOrder.getStatus()==OrderStatus.PAYED){
-            currentOrder.setStatus(OrderStatus.TAKING);
-        }
-        currentOrder.addOrderedItem(new OrderItem(d,2));
-        currentOrder.addOrderedItem(new OrderItem(d1,1));
-        currentOrder.addOrderedItem(new OrderItem(d1,1));
-        currentOrder.printOrderBill();
-        restaurant.orderList.saveOrderListToFile("NewOrders.csv",restaurant.menu);
-        //restaurant.orderList.PrintOrderList();
+        //How to delete Dish by number in Dish menu
+        restaurant.menu.deleteDishItemByNumber(7);
+
+        //How to get Drink by number in Drink menu
+        Drink fifthDrink = restaurant.menu.getDrinkItemByNumber(5);
+        System.out.println(fifthDrink);
+
+        //How to delete Drink by number in Drink menu
+        restaurant.menu.deleteDrinkItemByNumber(5);
+
+        restaurant.menu.printMenu();
 
     }
 }
