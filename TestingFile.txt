@@ -1,9 +1,4 @@
-import java.io.FileNotFoundException;
-
-public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-
-        Restaurant restaurant = new Restaurant();
+Restaurant restaurant = new Restaurant();
         restaurant.menu.printMenu();
         restaurant.orderList.PrintOrderList();
 
@@ -29,9 +24,6 @@ public class Main {
         currentOrder.addOrderedItem(new OrderItem(d,2));
         currentOrder.addOrderedItem(new OrderItem(d1,1));
         currentOrder.addOrderedItem(new OrderItem(d1,1));
-        currentOrder.printOrderBill();
-        restaurant.orderList.saveOrderListToFile("NewOrders.csv",restaurant.menu);
-        //restaurant.orderList.PrintOrderList();
 
-    }
-}
+        restaurant.orderList.saveOrderListToFile("NewOrders.csv",restaurant.menu);
+        restaurant.orderList.PrintOrderList();

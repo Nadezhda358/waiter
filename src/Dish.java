@@ -26,6 +26,6 @@ public class Dish extends MenuItem{
 
     @Override
     public String toString() {
-        return this.name+ " ("+this.weightInGrams+" g) - "+this.price+" lv.";
+        return String.format("%s (%d g) - %.2f lv.",this.name,this.weightInGrams,this.price);
     }
 }
