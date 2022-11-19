@@ -29,9 +29,9 @@ public class Main {
         currentOrder.addOrderedItem(new OrderItem(d,2));
         currentOrder.addOrderedItem(new OrderItem(d1,1));
         currentOrder.addOrderedItem(new OrderItem(d1,1));
-
+        currentOrder.printOrderBill();
         restaurant.orderList.saveOrderListToFile("NewOrders.csv",restaurant.menu);
-        restaurant.orderList.PrintOrderList();
+        //restaurant.orderList.PrintOrderList();
 
     }
 }
