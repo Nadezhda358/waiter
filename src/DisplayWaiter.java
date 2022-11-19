@@ -15,7 +15,7 @@ public class DisplayWaiter {
                 break;
             case 2:
                 restaurant.orderList.PrintOrderList();
-                printOrdersMenu();
+                printOrdersMenu(restaurant.menu);
                 break;
             case 3:
                 Login.printStartMenu();break;
@@ -26,26 +26,31 @@ public class DisplayWaiter {
     }
     public static void editMenu(Menu menu){
         Scanner scan = new Scanner(System.in);
-        System.out.println("\n1.1 add new dish\n1.2 add new drink\n1.3 remove item\n1.4 back");
-        System.out.print("Enter your choice(1-4): ");
+        System.out.println("\n1.1 add new dish\n1.2 add new drink\n1.3 remove dish\n1.4 remove drink\n1.5 back");
+        System.out.print("Enter your choice(1-5): ");
         int choice = scan.nextInt();
         switch (choice) {
-            case 1:
-                menu.addDishItem(readDish());
-                menu.saveMenuToFile("Menu.csv");
-                editMenu(menu);
-            case 2:
-                menu.addDrinkItem(readDrink());
+            case 1:menu.addDishItem(readDish());
+            menu.saveMenuToFile("Menu.csv");
+            editMenu(menu);
+            break;
+            case 2: menu.addDrinkItem(readDrink());
+            menu.saveMenuToFile("Menu.csv");
+            editMenu(menu);
+            break;
+            case 3:System.out.print("Enter dish number: ");
+                int dishNumber = scan.nextInt();
+                menu.deleteDishItemByNumber(dishNumber);
                 menu.saveMenuToFile("Menu.csv");
                 editMenu(menu);
                 break;
-            case 3:
-                //TODO method that removes item from the menu
-                menu.deleteDishItem(readDish());
+            case 4:System.out.print("Enter drink number: ");
+                int drinkNumber = scan.nextInt();
+                menu.deleteDrinkItemByNumber(drinkNumber);
                 menu.saveMenuToFile("Menu.csv");
                 editMenu(menu);
                 break;
-            case 4:
+            case 5:
                 System.out.println();
                 printWaiterMenu();
                 break;
@@ -78,36 +83,57 @@ public class DisplayWaiter {
         int ml = scan.nextInt();
         return new Drink(name, price, DrinkType.valueOf(drinkType.toUpperCase()), ml);
     }
-    public static void printOrdersMenu(){
+    public static void printOrdersMenu(Menu menu){
         Scanner scan = new Scanner(System.in);
         System.out.println("\n2.1 add order\n2.2 edit order\n2.3 back");
         System.out.print("Enter your choice(1-3): ");
         int choice = scan.nextInt();
         switch (choice){
-            case 1:printOrdersMenu(); break;//TODO method that adds order
-            case 2:editOrder(); printOrdersMenu(); break;//TODO chose a table, check if it has an order and print the menu for editing it
+            case 1:printOrdersMenu(menu);
+                System.out.print("Enter table number: ");
+                int tableNumber = scan.nextInt();
+                Order order = new Order(tableNumber);
+                printOrdersMenu(menu); break;
+            case 2:
+                System.out.print("Witch order do you want to edit?\nEnter the number: " );
+                int orderNumber = scan.nextInt();
+                //editOrder();
+                printOrdersMenu(menu); break;//TODO chose a table, check if it has an order and print the menu for editing it
             case 3:
                 System.out.println();
                 printWaiterMenu(); break;
             default:
                 System.out.println("Invalid input. Try again.\n");
-                printOrdersMenu();
+                printOrdersMenu(menu);
         }
     }
-    public static void editOrder(){
+    public static void editOrder(Order order, Menu menu){
         Scanner scan = new Scanner(System.in);
         System.out.println("\n1 add dish to order\n2 add drink to order\n3 serve order\n4 playing the bill\n5 back");
-        System.out.print("Enter your choice(1-3): ");
+        System.out.print("Enter your choice(1-5): ");
         int choice = scan.nextInt();
         switch (choice){
-            case 1:break;
-            case 2:break;
+            case 1:
+                menu.printDishItems();
+                System.out.print("Enter the number of the dish: ");
+                int dishNumber = scan.nextInt();
+                System.out.println("Enter portions count: ");
+                int portionsCount = scan.nextInt();
+                order.addOrderedItem(new OrderItem(menu.getDishItemByNumber(dishNumber), portionsCount));
+            case 2:
+                menu.printDrinkItems();
+                System.out.print("Enter the number of the drink: ");
+                int drinkNumber = scan.nextInt();
+                System.out.println("Enter count: ");
+                int drinkCount = scan.nextInt();
+                order.addOrderedItem(new OrderItem(menu.getDrinkItemByNumber(drinkNumber), drinkCount));
+                break;
             case 3:break;
             case 4:break;
-            case 5:printOrdersMenu();break;
+            case 5:printOrdersMenu(menu);break;
         default:
                 System.out.println("Invalid input. Try again.\n");
-                editOrder();
+                editOrder(order, menu);
         }
     }
 }
