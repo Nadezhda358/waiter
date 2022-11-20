@@ -14,11 +14,11 @@ public class DisplayWaiter {
                 editMenu(restaurant.menu);
                 break;
             case 2:
-                restaurant.orderList.PrintOrderList();
+                //restaurant.orderList.PrintOrderList();
                 printOrdersMenu(restaurant.menu);
                 break;
             case 3:
-                Login.printStartMenu();break;
+                //Login.printStartMenu();break;
             default:
                 System.out.println("Invalid input. Try again.\n");
                 printWaiterMenu();
@@ -65,11 +65,13 @@ public class DisplayWaiter {
         String name = scan.nextLine();
         System.out.print("Enter dish price: ");
         double price = scan.nextDouble();
-        System.out.print("Enter dish type: ");
-        String dishType = scan.next();
+        DishType.printDishTypes();
+        System.out.print("Enter the number of the dish type: ");
+        int dishTypeNumber = scan.nextInt();
+        DishType dishType = DishType.getDishTypeByNumber(dishTypeNumber);
         System.out.print("Enter dish weight in grams: ");
         int weight = scan.nextInt();
-        return new Dish(name, price, DishType.valueOf(dishType.toUpperCase()), weight);
+        return new Dish(name, price, dishType, weight);
     }
     public static Drink readDrink(){
         Scanner scan = new Scanner(System.in);
@@ -77,11 +79,13 @@ public class DisplayWaiter {
         String name = scan.nextLine();
         System.out.print("Enter drink price: ");
         double price = scan.nextDouble();
-        System.out.print("Enter drink type: ");
-        String drinkType = scan.next();
+        DrinkType.printDrinkTypes();
+        System.out.print("Enter the number of the drink type: ");
+        int drinkTypeNumber = scan.nextInt();
+        DrinkType drinkType = DrinkType.getDrinkTypeByNumber(drinkTypeNumber);
         System.out.print("Enter drink volume in ml: ");
         int ml = scan.nextInt();
-        return new Drink(name, price, DrinkType.valueOf(drinkType.toUpperCase()), ml);
+        return new Drink(name, price, drinkType, ml);
     }
     public static void printOrdersMenu(Menu menu){
         Scanner scan = new Scanner(System.in);
