@@ -41,3 +41,13 @@ Restaurant restaurant = new Restaurant();
 
            //How to delete Drink by number in Drink menu
            restaurant.menu.deleteDrinkItemByNumber(5);
+
+        DishType.printDishTypes();
+        int selectedDish = 1;
+        DishType dishType = DishType.getDishTypeByNumber(selectedDish);
+        System.out.println(dishType);
+
+        DrinkType.printDrinkTypes();
+        int selectedDrink = 2;
+        DrinkType drinkType = DrinkType.getDrinkTypeByNumber(selectedDrink);
+        System.out.println(drinkType);
