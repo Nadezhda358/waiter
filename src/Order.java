@@ -58,7 +58,7 @@ public class Order {
     public void printOrder(){
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
         String formattedDate = this.dateOfOrder.format(formatDate);
-        System.out.println("\n--- O R D E R --- in Table "+this.tableNumber+"\nCreated on "+formattedDate);
+        System.out.println("\n-- O R D E R -- in Table "+this.tableNumber+" is "+this.getStatus()+"\nCreated on "+formattedDate);
         System.out.println("-------------------------------------");
 
         for (OrderItem item: this.orderedItems) {
@@ -70,7 +70,7 @@ public class Order {
     public void printOrderBill(){
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
         String formattedDate = this.dateOfOrder.format(formatDate);
-        System.out.println("\n--- ORDER BILL--- to Table "+this.tableNumber+"\nCreated on "+formattedDate);
+        System.out.println("\n--- ORDER BILL--- to Table "+this.tableNumber+" is "+this.getStatus()+"\nCreated on "+formattedDate);
         System.out.println("--------------------------------------------------------");
         double totalOrderSum = 0;
         for (OrderItem item: this.orderedItems) {

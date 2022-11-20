@@ -74,7 +74,7 @@ public class Menu {
         System.out.println("\n***** DRINKS *****");
         int currentNum = 0;
         for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
-            System.out.println("\t" + drinkItem.getKey() + " DRINKS");
+            System.out.println("\t--" + drinkItem.getKey() + " drinks--");
 
             for (int i = 0; i < drinkItem.getValue().size(); i++) {
                 currentNum++;
@@ -87,7 +87,7 @@ public class Menu {
         System.out.println("\n***** DISHES *****");
         int currentNum = 0;
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
-            System.out.println("\t" + dishItem.getKey() + "S");
+            System.out.println("\t" + dishItem.getKey());
 
             for (int i = 0; i < dishItem.getValue().size(); i++) {
                 currentNum++;
