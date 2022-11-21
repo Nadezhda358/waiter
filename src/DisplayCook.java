@@ -13,7 +13,7 @@ public class DisplayCook {
                 //TODO change status
                 break;
             case 3:
-                Login.printStartMenu();break;
+                //Login.printStartMenu();break;
             default:
                 System.out.println("Invalid input. Try again.\n");
                 printCookMenu();
