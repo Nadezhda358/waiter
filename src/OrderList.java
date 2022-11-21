@@ -49,15 +49,27 @@ public class OrderList {
         }
     }
 
-    public void PrintOrderList() {
+    //public void PrintOrderList() {
+    //    for (Order order : this.orders) {
+    //        if (order.getStatus() != OrderStatus.PAYED) {
+    //            order.printOrder();
+    //        }
+    //    }
+    //}
+    public void PrintOrderList(OrderStatus status) {
         for (Order order : this.orders) {
-            if (order.getStatus() != OrderStatus.PAYED) {
+            if (order.getStatus() == status) {
                 order.printOrder();
             }
         }
     }
-    public void saveOrderListToFile(String fileName, Menu menu) throws FileNotFoundException {
-        PrintStream fileWriter = new PrintStream(fileName);
+    public void saveOrderListToFile(String fileName, Menu menu) {
+        PrintStream fileWriter;
+        try {
+            fileWriter = new PrintStream(fileName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for (Order order : this.orders) {
             if (order.getStatus() == OrderStatus.PAYED) {
                 fileWriter.print(order.getTableNumber()+","+order.getStatus()+"\n");
