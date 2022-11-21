@@ -1,23 +1,24 @@
-Soup,Chicken soup,1.99,350
-Soup,Shkembe chorba,2.5,400
-Soup,Tarator,1.75,350
-Salad,Shopska salad,6.25,400
-Salad,Village salad,5.0,450
-Grill,Chicken wings,6.0,250
-Grill,Kebabche,2.0,110
-Grill,Kyufte,2.2,100
-Dessert,Melba,3.0,190
-Dessert,Torta,2.5,200
+SOUP,Chicken soup,1.99,350
+SOUP,Shkembe soup,2.49,350
+SOUP,Tarator,1.75,350
+SALAD,Shopska salad,6.25,400
+SALAD,Village salad,5.0,450
+SALAD,Shepherd's salad,6.25,500
+GRILL,Chicken wings,6.0,250
+GRILL,Kebabche,2.0,110
+GRILL,Kyufte,2.2,100
+DESSERT,Melba,3.0,190
+DESSERT,Cake,2.5,200
 Drinks
-Hot,Long coffee,2.2,120
-Hot,Normal coffee,2.2,60
-Hot,Tea,1.9,200
-Non alcoholic,Capy,3.0,300
-Non alcoholic,Cola,2.6,250
-Non alcoholic,Fanta,2.6,250
-Alcoholic,Beer Shumen,2.0,330
-Alcoholic,Beer Shumen,3.0,500
-Alcoholic,Rakiya Burgas 63,4.4,50
-Alcoholic,Rakiya Peshtera,3.2,50
-Alcoholic,Vodka Stolichna,3.0,50
-Coctail,Bloody Mary,4.0,200
+HOT,Long coffee,2.2,120
+HOT,Normal coffee,2.2,60
+HOT,Tea,1.9,200
+NONALCOHOLIC,Cappy,3.0,300
+NONALCOHOLIC,Cola,2.6,250
+NONALCOHOLIC,Fanta,2.6,250
+ALCOHOLIC,Beer Shumen,2.0,330
+ALCOHOLIC,Beer Shumen,3.0,500
+ALCOHOLIC,Rakiya Burgas 63,4.4,50
+ALCOHOLIC,Rakiya Peshtera,3.2,50
+ALCOHOLIC,Vodka Stolichna,3.0,50
+COCKTAIL,Bloody Mary,4.0,200

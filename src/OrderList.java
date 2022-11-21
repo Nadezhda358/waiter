@@ -49,39 +49,48 @@ public class OrderList {
         }
     }
 
-    //public void PrintOrderList() {
-    //    for (Order order : this.orders) {
-    //        if (order.getStatus() != OrderStatus.PAYED) {
-    //            order.printOrder();
-    //        }
-    //    }
-    //}
-    public void PrintOrderList(OrderStatus status) {
+    public void PrintOrderList() {
         for (Order order : this.orders) {
-            if (order.getStatus() == status) {
+            if (order.getStatus() != OrderStatus.PAYED) {
                 order.printOrder();
             }
         }
     }
-    public void saveOrderListToFile(String fileName, Menu menu) {
-        PrintStream fileWriter;
-        try {
-            fileWriter = new PrintStream(fileName);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+    public void PrintWaiterOrderListToChangeStatus() {
+        for (Order order : this.orders) {
+            if (order.getStatus() != OrderStatus.PAYED &&
+                    order.getStatus() != OrderStatus.COOKING &&
+                    order.getStatus() != OrderStatus.TAKEN) {
+                order.printOrder();
+            }
         }
+    }
+    public void PrintCookOrderList() {
+        for (Order order : this.orders) {
+            if (order.getStatus() != OrderStatus.PAYED &&
+                    order.getStatus() != OrderStatus.TAKING &&
+                    order.getStatus() != OrderStatus.SERVED &&
+            order.getStatus() != OrderStatus.COOKED)
+            {
+                order.printOrder();
+            }
+        }
+    }
+
+    public void saveOrderListToFile(String fileName, Menu menu) throws FileNotFoundException {
+        PrintStream fileWriter = new PrintStream(fileName);
         for (Order order : this.orders) {
             if (order.getStatus() == OrderStatus.PAYED) {
-                fileWriter.print(order.getTableNumber()+","+order.getStatus()+"\n");
+                fileWriter.print(order.getTableNumber() + "," + order.getStatus() + "\n");
             } else {
-                fileWriter.print(order.getTableNumber()+","+order.getStatus()+","+order.getDateOfOrder().format(DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")));
-                for (OrderItem orderItem: order.getOrderedItems() ) {
-                    if (orderItem.getItem() instanceof Dish){
-                            fileWriter.print(",Dish,"+((Dish) orderItem.getItem()).getDishType()+","+menu.getDishItems().get(((Dish) orderItem.getItem()).getDishType()).indexOf((Dish) orderItem.getItem()));
-                    } else if (orderItem.getItem() instanceof Drink){
-                        fileWriter.print(",Drink,"+((Drink) orderItem.getItem()).getDrinkType()+","+menu.getDrinkItems().get(((Drink) orderItem.getItem()).getDrinkType()).indexOf((Drink) orderItem.getItem()));
+                fileWriter.print(order.getTableNumber() + "," + order.getStatus() + "," + order.getDateOfOrder().format(DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")));
+                for (OrderItem orderItem : order.getOrderedItems()) {
+                    if (orderItem.getItem() instanceof Dish) {
+                        fileWriter.print(",Dish," + ((Dish) orderItem.getItem()).getDishType() + "," + menu.getDishItems().get(((Dish) orderItem.getItem()).getDishType()).indexOf((Dish) orderItem.getItem()));
+                    } else if (orderItem.getItem() instanceof Drink) {
+                        fileWriter.print(",Drink," + ((Drink) orderItem.getItem()).getDrinkType() + "," + menu.getDrinkItems().get(((Drink) orderItem.getItem()).getDrinkType()).indexOf((Drink) orderItem.getItem()));
                     }
-                    fileWriter.print(","+orderItem.getCount());
+                    fileWriter.print("," + orderItem.getCount());
                 }
                 fileWriter.print("\n");
             }
@@ -90,6 +99,7 @@ public class OrderList {
         fileWriter.close();
 
     }
+
     @Override
     public String toString() {
         return "OrderList{" +

@@ -1,10 +1,10 @@
 import java.util.Arrays;
 
 public enum DishType {
-    SOUP("Soup"),
-    SALAD("Salad"),
-    GRILL("Grill"),
-    DESSERT("Dessert");
+    SOUP("Soups"),
+    SALAD("Salads"),
+    GRILL("Grills"),
+    DESSERT("Desserts");
 
     private final String textRepresentation;
 
