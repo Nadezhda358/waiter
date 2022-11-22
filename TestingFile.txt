@@ -52,3 +52,16 @@ Restaurant restaurant = new Restaurant();
         int selectedDrink = 2;
         DrinkType drinkType = DrinkType.getDrinkTypeByNumber(selectedDrink);
         System.out.println(drinkType);
+
+        System.out.println("\n--------------Waiter Order List To View--------------");
+                restaurant.orderList.PrintOrderList();
+
+                System.out.println("\n--------------Waiter Order List To Change--------------");
+                restaurant.orderList.PrintWaiterOrderListToChangeStatus();
+
+                System.out.println("\n--------------Cook Order List--------------");
+                restaurant.orderList.PrintCookOrderList();
+
+                //Prints Order Bill for table number
+                int tableNumber = 3;
+                restaurant.orderList.orders.get(tableNumber - 1).printOrderBill();
