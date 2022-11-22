@@ -81,14 +81,14 @@ public class OrderList {
         PrintStream fileWriter = new PrintStream(fileName);
         for (Order order : this.orders) {
             if (order.getStatus() == OrderStatus.PAYED) {
-                fileWriter.print(order.getTableNumber() + "," + order.getStatus() + "\n");
+                fileWriter.print(order.getTableNumber() + "," + order.getStatus().name() + "\n");
             } else {
-                fileWriter.print(order.getTableNumber() + "," + order.getStatus() + "," + order.getDateOfOrder().format(DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")));
+                fileWriter.print(order.getTableNumber() + "," + order.getStatus().name() + "," + order.getDateOfOrder().format(DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")));
                 for (OrderItem orderItem : order.getOrderedItems()) {
                     if (orderItem.getItem() instanceof Dish) {
-                        fileWriter.print(",Dish," + ((Dish) orderItem.getItem()).getDishType() + "," + menu.getDishItems().get(((Dish) orderItem.getItem()).getDishType()).indexOf((Dish) orderItem.getItem()));
+                        fileWriter.print(",Dish," + ((Dish) orderItem.getItem()).getDishType().name() + "," + menu.getDishItems().get(((Dish) orderItem.getItem()).getDishType()).indexOf((Dish) orderItem.getItem()));
                     } else if (orderItem.getItem() instanceof Drink) {
-                        fileWriter.print(",Drink," + ((Drink) orderItem.getItem()).getDrinkType() + "," + menu.getDrinkItems().get(((Drink) orderItem.getItem()).getDrinkType()).indexOf((Drink) orderItem.getItem()));
+                        fileWriter.print(",Drink," + ((Drink) orderItem.getItem()).getDrinkType().name() + "," + menu.getDrinkItems().get(((Drink) orderItem.getItem()).getDrinkType()).indexOf((Drink) orderItem.getItem()));
                     }
                     fileWriter.print("," + orderItem.getCount());
                 }
