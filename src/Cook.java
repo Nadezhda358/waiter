@@ -14,10 +14,6 @@ public class Cook extends User{
         int choice = scan.nextInt();
         switch (choice){
             case 1:
-                System.out.println("\nTAKING ORDERS:");
-                restaurant.orderList.PrintOrderList();
-                System.out.println("\nCOOKING ORDERS:");
-                restaurant.orderList.PrintOrderList();
                 break;
             case 2:
                 //TODO change status

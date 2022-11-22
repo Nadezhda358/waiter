@@ -87,6 +87,20 @@ public class Order {
         System.out.printf("%-40sTotal: %.2f lv.\n", emptyString, totalOrderSum);
 
     }
+    public void changeStatusWaiter(){
+        if (getStatus().equals(OrderStatus.TAKING)){
+            setStatus(OrderStatus.TAKEN);
+            System.out.println("The order is taken. It can't be changed anymore.");
+        }else if (getStatus().equals(OrderStatus.COOKED)){
+            setStatus(OrderStatus.SERVED);
+            System.out.println("The order is served.");
+        }else if(getStatus().equals(OrderStatus.SERVED)){
+            setStatus(OrderStatus.PAYED);
+            printOrderBill();
+        }else{
+            System.out.println("You can't change the status of that order.");
+        }
+    }
 
     @Override
     public String toString() {

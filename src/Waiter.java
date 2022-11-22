@@ -107,15 +107,21 @@ public class Waiter extends User{
                 int tableNumber = scan.nextInt();
                 if (restaurant.orderList.orders.get(tableNumber - 1).getStatus()==OrderStatus.PAYED){
                     restaurant.orderList.orders.get(tableNumber - 1).setStatus(OrderStatus.TAKING);
+                    restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                    editOrder(restaurant, (tableNumber-1));
+                }else{
+                    System.out.println("That table is already taken.");
+                    printOrdersMenu(restaurant);
                 }
-                printOrdersMenu(restaurant); break;
+                break;
+                //printOrdersMenu(restaurant); break;
             case 2:
                 System.out.print("Witch order do you want to edit?\nEnter the number: " );
                 int orderNumber = scan.nextInt();
                 editOrder(restaurant, (orderNumber-1));
-                printOrdersMenu(restaurant); break;//TODO chose a table, check if it has an order and print the menu for editing it
+                //printOrdersMenu(restaurant);
+                break;//TODO chose a table, check if it has an order and print the menu for editing it
             case 3:
-                System.out.println();
                 display(restaurant); break;
             default:
                 System.out.println("Invalid input. Try again.\n");
@@ -135,7 +141,8 @@ public class Waiter extends User{
                 System.out.print("Enter portions count: ");
                 int portionsCount = scan.nextInt();
                 restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDishItemByNumber(dishNumber), portionsCount));
-                restaurant.orderList.saveOrderListToFile("Orders.csv", restaurant.menu);
+                restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                editOrder(restaurant, orderNumber);
                 break;
             case 2:
                 restaurant.menu.printDrinkItems();
@@ -144,9 +151,13 @@ public class Waiter extends User{
                 System.out.print("Enter count: ");
                 int drinkCount = scan.nextInt();
                 restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDrinkItemByNumber(drinkNumber), drinkCount));
-                restaurant.orderList.saveOrderListToFile("Orders.csv", restaurant.menu);
+                restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                editOrder(restaurant, orderNumber);
                 break;
-            case 3:break;
+            case 3:
+                restaurant.orderList.orders.get(orderNumber).changeStatusWaiter();
+                restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName,restaurant.menu);
+                printOrdersMenu(restaurant);break;
             case 4:printOrdersMenu(restaurant);break;
             default:
                 System.out.println("Invalid input. Try again.\n");
