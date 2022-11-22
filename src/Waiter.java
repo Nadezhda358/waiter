@@ -8,7 +8,6 @@ public class Waiter extends User{
 
     @Override
     public void display(Restaurant restaurant) {
-        //DisplayWaiter.printWaiterMenu();
         Scanner scan = new Scanner(System.in);
         System.out.println("1. Menu\n2. Orders\n3. Back");
         System.out.print("Enter your choice(1-3): ");
@@ -40,23 +39,23 @@ public class Waiter extends User{
         int choice = scan.nextInt();
         switch (choice) {
             case 1:restaurant.menu.addDishItem(readDish());
-                restaurant.menu.saveMenuToFile("Menu.csv");
+                restaurant.menu.saveMenuToFile(restaurant.menuFileName);
                 editMenu(restaurant);
                 break;
             case 2: restaurant.menu.addDrinkItem(readDrink());
-                restaurant.menu.saveMenuToFile("Menu.csv");
+                restaurant.menu.saveMenuToFile(restaurant.menuFileName);
                 editMenu(restaurant);
                 break;
             case 3:System.out.print("Enter dish number: ");
                 int dishNumber = scan.nextInt();
                 restaurant.menu.deleteDishItemByNumber(dishNumber);
-                restaurant.menu.saveMenuToFile("Menu.csv");
+                restaurant.menu.saveMenuToFile(restaurant.menuFileName);
                 editMenu(restaurant);
                 break;
             case 4:System.out.print("Enter drink number: ");
                 int drinkNumber = scan.nextInt();
                 restaurant.menu.deleteDrinkItemByNumber(drinkNumber);
-                restaurant.menu.saveMenuToFile("Menu.csv");
+                restaurant.menu.saveMenuToFile(restaurant.menuFileName);
                 editMenu(restaurant);
                 break;
             case 5:
@@ -120,7 +119,7 @@ public class Waiter extends User{
                 int orderNumber = scan.nextInt();
                 editOrder(restaurant, (orderNumber-1));
                 //printOrdersMenu(restaurant);
-                break;//TODO chose a table, check if it has an order and print the menu for editing it
+                break;//TODO check if the table has an order
             case 3:
                 display(restaurant); break;
             default:

@@ -88,7 +88,9 @@ public class Order {
 
     }
     public void changeStatusWaiter(){
-        if (getStatus().equals(OrderStatus.TAKING)){
+        if (getStatus().equals(OrderStatus.PAYED)){
+            System.out.println("There is no order from that table.");
+        }else if (getStatus().equals(OrderStatus.TAKING)){
             setStatus(OrderStatus.TAKEN);
             System.out.println("The order is taken. It can't be changed anymore.");
         }else if (getStatus().equals(OrderStatus.COOKED)){
@@ -97,6 +99,19 @@ public class Order {
         }else if(getStatus().equals(OrderStatus.SERVED)){
             setStatus(OrderStatus.PAYED);
             printOrderBill();
+        }else{
+            System.out.println("You can't change the status of that order.");
+        }
+    }
+    public void changeStatusCook(){
+        if (getStatus().equals(OrderStatus.PAYED)){
+            System.out.println("There is no order from that table.");
+        }else if (getStatus().equals(OrderStatus.TAKEN)){
+            setStatus(OrderStatus.COOKING);
+            System.out.println("The order is cooking.");
+        }else if(getStatus().equals(OrderStatus.COOKING)){
+            setStatus(OrderStatus.COOKED);
+            System.out.println("The order is cooked.");
         }else{
             System.out.println("You can't change the status of that order.");
         }
