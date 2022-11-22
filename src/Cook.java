@@ -15,12 +15,13 @@ public class Cook extends User{
         switch (choice){
             case 1:
                 System.out.println("\nTAKING ORDERS:");
-                restaurant.orderList.PrintOrderList(OrderStatus.TAKING);
+                restaurant.orderList.PrintOrderList();
                 System.out.println("\nCOOKING ORDERS:");
-                restaurant.orderList.PrintOrderList(OrderStatus.COOKING);
+                restaurant.orderList.PrintOrderList();
                 break;
             case 2:
                 //TODO change status
+                restaurant.orderList.PrintCookOrderList();
                 break;
             case 3:
                 Login.printStartMenu(restaurant);break;
