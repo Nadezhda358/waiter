@@ -166,7 +166,7 @@ public class Menu {
         }
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
             for (int i = 0; i < dishItem.getValue().size(); i++) {
-                fileWriter.println(dishItem.getKey() + ","
+                fileWriter.println(dishItem.getKey().name() + ","
                         + dishItem.getValue().get(i).getName() + "," +
                         dishItem.getValue().get(i).getPrice() + "," +
                         dishItem.getValue().get(i).getWeightInGrams());
@@ -175,7 +175,7 @@ public class Menu {
         fileWriter.println("Drinks");
         for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
             for (int i = 0; i < drinkItem.getValue().size(); i++) {
-                fileWriter.println(drinkItem.getKey() + ","
+                fileWriter.println(drinkItem.getKey().name() + ","
                         + drinkItem.getValue().get(i).getName() + "," +
                         drinkItem.getValue().get(i).getPrice() + "," +
                         drinkItem.getValue().get(i).getVolumeInMl());
