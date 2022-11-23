@@ -1,2 +1,4 @@
 Nadezhda,Nadezhda123,waiter
 Ivan,ivan456,cook
+Ivan,ivan456,waiter
+a,1,waiter
