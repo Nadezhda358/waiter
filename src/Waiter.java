@@ -17,7 +17,7 @@ public class Waiter extends User{
                 restaurant.menu.printMenu();
                 editMenu(restaurant);
                 break;
-            case 2:
+            case 2:/*
                 System.out.println("\nTAKING ORDERS:");
                 restaurant.orderList.PrintOrderList(OrderStatus.TAKING);
                 System.out.println("\nCOOKING ORDERS:");
@@ -25,7 +25,8 @@ public class Waiter extends User{
                 System.out.println("\nCOOKED ORDERS:");
                 restaurant.orderList.PrintOrderList(OrderStatus.COOKED);
                 System.out.println("\nSERVED ORDERS:");
-                restaurant.orderList.PrintOrderList(OrderStatus.SERVED);
+                restaurant.orderList.PrintOrderList(OrderStatus.SERVED);*/
+                restaurant.orderList.PrintWaiterOrderListToChangeStatus();
                 printOrdersMenu(restaurant);
                 break;
             case 3:
@@ -131,7 +132,7 @@ public class Waiter extends User{
                 System.out.print("Enter portions count: ");
                 int portionsCount = scan.nextInt();
                 restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDishItemByNumber(dishNumber), portionsCount));
-                restaurant.orderList.saveOrderListToFile("Orders.csv", restaurant.menu);
+                //restaurant.orderList.saveOrderListToFile("Orders.csv", restaurant.menu);
                 break;
             case 2:
                 restaurant.menu.printDrinkItems();
@@ -140,7 +141,7 @@ public class Waiter extends User{
                 System.out.print("Enter count: ");
                 int drinkCount = scan.nextInt();
                 restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDrinkItemByNumber(drinkNumber), drinkCount));
-                restaurant.orderList.saveOrderListToFile("Orders.csv", restaurant.menu);
+                //restaurant.orderList.saveOrderListToFile("Orders.csv", restaurant.menu);
                 break;
             case 3:break;
             case 4:break;
