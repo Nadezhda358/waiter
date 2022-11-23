@@ -149,7 +149,7 @@ public class Waiter extends User{
     }
     public void editOrder(Restaurant restaurant, int orderNumber) throws FileNotFoundException {
         Scanner scan = new Scanner(System.in);
-        System.out.println("\n1 add dish to order\n2 add drink to order\n3 change status\n4 back");
+        System.out.println("\n1 add dish to order\n2 add drink to order\n3 delete item from order\n4 change status\n5 back");
         System.out.print("Enter your choice(1-5): ");
         int choice = scan.nextInt();
         switch (choice) {
@@ -183,13 +183,25 @@ public class Waiter extends User{
                     editOrder(restaurant, orderNumber);
                 }
             }
-            case 3 -> {
+            case 3 ->{
+                if (restaurant.orderList.orders.get(orderNumber).getStatus().equals(OrderStatus.TAKING)) {
+                    System.out.print("Enter the number of the item you want to remove: ");
+                    int itemNumber = scan.nextInt();
+                    restaurant.orderList.orders.get(orderNumber).deleteOrderedItem(itemNumber);
+                    restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                    editOrder(restaurant, orderNumber);
+                }else{
+                    System.out.println("The order is already taken. You can't remove items from it.");
+                    editOrder(restaurant, orderNumber);
+                }
+            }
+            case 4 -> {
                 //restaurant.orderList.PrintWaiterOrderListToChangeStatus();
                 restaurant.orderList.orders.get(orderNumber).changeStatusWaiter();
                 restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                 editOrder(restaurant, orderNumber);
             }
-            case 4 -> printOrdersMenu(restaurant);
+            case 5 -> printOrdersMenu(restaurant);
             default -> {
                 System.out.println("Invalid input. Try again.\n");
                 editOrder(restaurant, orderNumber);
