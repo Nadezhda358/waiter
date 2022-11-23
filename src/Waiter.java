@@ -154,29 +154,40 @@ public class Waiter extends User{
         int choice = scan.nextInt();
         switch (choice) {
             case 1 -> {
-                restaurant.menu.printDishItems();
-                System.out.print("Enter the number of the dish: ");
-                int dishNumber = scan.nextInt();
-                System.out.print("Enter portions count: ");
-                int portionsCount = scan.nextInt();
-                restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDishItemByNumber(dishNumber), portionsCount));
-                restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
-                editOrder(restaurant, orderNumber);
+                if (restaurant.orderList.orders.get(orderNumber).getStatus().equals(OrderStatus.TAKING)) {
+                    restaurant.menu.printDishItems();
+                    System.out.print("Enter the number of the dish: ");
+                    int dishNumber = scan.nextInt();
+                    System.out.print("Enter portions count: ");
+                    int portionsCount = scan.nextInt();
+                    restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDishItemByNumber(dishNumber), portionsCount));
+                    restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                    editOrder(restaurant, orderNumber);
+                }else{
+                    System.out.println("The order is already taken. You can't add dishes to it.");
+                    editOrder(restaurant, orderNumber);
+                }
             }
             case 2 -> {
-                restaurant.menu.printDrinkItems();
-                System.out.print("Enter the number of the drink: ");
-                int drinkNumber = scan.nextInt();
-                System.out.print("Enter count: ");
-                int drinkCount = scan.nextInt();
-                restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDrinkItemByNumber(drinkNumber), drinkCount));
-                restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
-                editOrder(restaurant, orderNumber);
+                if (restaurant.orderList.orders.get(orderNumber).getStatus().equals(OrderStatus.TAKING)) {
+                    restaurant.menu.printDrinkItems();
+                    System.out.print("Enter the number of the drink: ");
+                    int drinkNumber = scan.nextInt();
+                    System.out.print("Enter count: ");
+                    int drinkCount = scan.nextInt();
+                    restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDrinkItemByNumber(drinkNumber), drinkCount));
+                    restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                    editOrder(restaurant, orderNumber);
+                }else{
+                    System.out.println("The order is already taken. You can't add drinks to it.");
+                    editOrder(restaurant, orderNumber);
+                }
             }
             case 3 -> {
+                //restaurant.orderList.PrintWaiterOrderListToChangeStatus();
                 restaurant.orderList.orders.get(orderNumber).changeStatusWaiter();
                 restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
-                printOrdersMenu(restaurant);
+                editOrder(restaurant, orderNumber);
             }
             case 4 -> printOrdersMenu(restaurant);
             default -> {
