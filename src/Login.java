@@ -10,7 +10,7 @@ public class Login {
         String choice = scan.next();
         switch (choice) {
             case "1":
-                signUp(getUserInfo());
+                signUp(getUserInfo(), restaurant);
                 printStartMenu(restaurant);
                 break;
             case "2": login(getUserInfo(), restaurant);break;
@@ -23,27 +23,65 @@ public class Login {
     public static String getUserInfo() {
         String role, name, password;
         Scanner scan = new Scanner(System.in);
-        System.out.print("Enter your role (cook or waiter): ");
-        role = scan.next();//TODO check if such role exists
+        while (true){
+            System.out.print("Enter your role (" + Role.printRoles() + "): ");
+            role = scan.next();
+            if (isRoleValid(role)){
+                break;
+            }
+            System.out.println("There is no such role. Try again.");
+        }
         System.out.print("Enter your name: ");
         name = scan.next();
         System.out.print("Enter your password: ");
         password = scan.next();
-        return name + "," + password + "," + role.toUpperCase();
+        return name + "," + password + "," + role.toLowerCase();
     }
-    public static void signUp(String userInfo){
-        try {
-            FileWriter myWriter = new FileWriter("usersInfo.txt", true);
-            myWriter.append(userInfo).append("\n");
-            myWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static boolean isRoleValid(String role){
+        Role[] roles = Role.values();
+        for (Role value : roles) {
+            if (value.toString().equalsIgnoreCase(role)) {
+                return true;
+            }
         }
+        return false;
+    }
+    public static void signUp(String userInfo, Restaurant restaurant){
+        if (!isNameTaken(userInfo, restaurant)) {
+            try {
+                FileWriter myWriter = new FileWriter("usersInfo.txt", true);
+                myWriter.append(userInfo).append("\n");
+                myWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            addUser(userInfo, restaurant);
+        }else {
+            System.out.println("That username is already taken. Try again.");
+            signUp(getUserInfo(), restaurant);
+        }
+    }
+    public static void addUser(String userInfo, Restaurant restaurant){
+        String[] splitUserInfo = userInfo.split(",");
+        switch (splitUserInfo[2]) {
+            case "cook" -> restaurant.users.add(new Cook(splitUserInfo[0], splitUserInfo[1], Role.COOK));
+            case "waiter" -> restaurant.users.add(new Waiter(splitUserInfo[0], splitUserInfo[1], Role.WAITER));
+        }
+
+    }
+    public static boolean isNameTaken(String userInfo, Restaurant restaurant){
+        String[] splitUserInfo = userInfo.split(",");
+        for (int i = 0; i < restaurant.users.size(); i++){
+            if (splitUserInfo[0].equals(restaurant.users.get(i).getUsername()) && splitUserInfo[2].equalsIgnoreCase(restaurant.users.get(i).getRole().toString())){
+                return true;
+            }
+        }
+        return false;
     }
     public static void login(String userInfo, Restaurant restaurant){
         boolean doesUserExist = false;
         for (int i = 0; i < restaurant.users.size(); i++) {
-            String restaurantWorkerInfo = restaurant.users.get(i).getUsername() + "," + restaurant.users.get(i).getPassword() + "," + restaurant.users.get(i).getRole().toString();
+            String restaurantWorkerInfo = restaurant.users.get(i).getUsername() + "," + restaurant.users.get(i).getPassword() + "," + restaurant.users.get(i).getRole().toString().toLowerCase();
             if (restaurantWorkerInfo.equals(userInfo)){
                 restaurant.users.get(i).display(restaurant);
                 doesUserExist = true;
