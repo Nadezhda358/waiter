@@ -2,29 +2,23 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException {
 
         Restaurant restaurant = new Restaurant();
 
 
-        //Checks if save methods works correctly
-        //restaurant.orderList.saveOrderListToFile("Orders.csv",restaurant.menu);
-        //restaurant.menu.saveMenuToFile("Menu.csv");
-        Login.printStartMenu(restaurant);
+        //Checks when deletes order item with more, then one counts
+        int table= 5;
+        Order currentOrder = restaurant.orderList.orders.get(table-1);
+        currentOrder.printOrder();
+        int orderItemToDelete = 4;
+        /*currentOrder.deleteOrderedItem(orderItemToDelete);
+        currentOrder.printOrder();*/
 
-        ////restaurant.menu.printMenu();
-//
-        //System.out.println("\n--------------Waiter Order List To View--------------");
-        //restaurant.orderList.PrintOrderList();
-//
-        //System.out.println("\n--------------Waiter Order List To Change--------------");
-        //restaurant.orderList.PrintWaiterOrderListToChangeStatus();
-//
-        //System.out.println("\n--------------Cook Order List--------------");
-        //restaurant.orderList.PrintCookOrderList();
-//
-        ////Prints Order Bil for table number
-        //int tableNumber = 3;
-        //restaurant.orderList.orders.get(tableNumber-1).printOrderBill();
+        //Checks if deletes order item with one count
+        currentOrder.printOrder();
+        orderItemToDelete = 2;
+        currentOrder.deleteOrderedItem(orderItemToDelete);
+        currentOrder.printOrder();
     }
 }
