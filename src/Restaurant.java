@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Restaurant {
     String menuFileName = "Menu.csv";
     String orderListFileName = "Orders.csv";
+    private int tablesCount;
     public Menu menu;
     public OrderList orderList;
     public ArrayList<User> users = new ArrayList<>();
@@ -13,6 +14,23 @@ public class Restaurant {
         menu = new Menu(menuFileName);
         orderList = new OrderList(orderListFileName, menu);
         setUsers();
+        setTablesCount();
+    }
+
+    public void setTablesCount() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(orderListFileName));
+            while ((reader.readLine()) != null){
+                this.tablesCount++;
+            }
+            reader.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int getTablesCount() {
+        return tablesCount;
     }
 
     public void setUsers() {

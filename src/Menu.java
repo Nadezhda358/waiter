@@ -116,10 +116,13 @@ public class Menu {
     public void addDrinkItem(Drink drinkToAdd) {
         this.drinkItems.computeIfAbsent(drinkToAdd.getDrinkType(), k -> new ArrayList<>()).add(drinkToAdd);
     }
-
     public void deleteDishItemByNumber(int dishNumber) {
-        Dish dishToDelete = getDishItemByNumber(dishNumber);
-        this.dishItems.get(dishToDelete.getDishType()).remove(dishToDelete);
+        if (dishNumber <= dishItems.get(DishType.SOUP).size() + dishItems.get(DishType.SALAD).size() + dishItems.get(DishType.GRILL).size() + dishItems.get(DishType.DESSERT).size()){
+            Dish dishToDelete = getDishItemByNumber(dishNumber);
+            this.dishItems.get(dishToDelete.getDishType()).remove(dishToDelete);
+        }else {
+            System.out.println("There is no such dish.");
+        }
     }
     public Dish getDishItemByNumber(int dishNumber) {
         int currentNum = 0;
@@ -138,8 +141,12 @@ public class Menu {
     }
 
     public void deleteDrinkItemByNumber(int drinkNumber) {
-        Drink drinkToDelete = getDrinkItemByNumber(drinkNumber);
-        this.drinkItems.get(drinkToDelete.getDrinkType()).remove(drinkToDelete);
+        if (drinkNumber <= drinkItems.get(DrinkType.HOT).size() + drinkItems.get(DrinkType.ALCOHOLIC).size() + drinkItems.get(DrinkType.NONALCOHOLIC).size() + drinkItems.get(DrinkType.COCKTAIL).size()){
+            Drink drinkToDelete = getDrinkItemByNumber(drinkNumber);
+            this.drinkItems.get(drinkToDelete.getDrinkType()).remove(drinkToDelete);
+        }else{
+            System.out.println("There is no such drink.");
+        }
     }
     public Drink getDrinkItemByNumber(int drinkNumber) {
         int currentNum = 0;
