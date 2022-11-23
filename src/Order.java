@@ -99,6 +99,8 @@ public class Order {
         }else if(getStatus().equals(OrderStatus.SERVED)){
             setStatus(OrderStatus.PAYED);
             printOrderBill();
+            this.orderedItems = new ArrayList<>();
+
         }else{
             System.out.println("You can't change the status of that order.");
         }
