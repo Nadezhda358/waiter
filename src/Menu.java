@@ -10,7 +10,6 @@ public class Menu {
     public EnumMap<DishType, ArrayList<Dish>> getDishItems() {
         return dishItems;
     }
-
     public void setDishItems(EnumMap<DishType, ArrayList<Dish>> dishItems) {
         this.dishItems = dishItems;
     }

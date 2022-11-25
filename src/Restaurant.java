@@ -40,8 +40,8 @@ public class Restaurant {
             while ((line = reader.readLine()) != null){
                 String[] splitLine = line.split(",");
                 switch (splitLine[2]){
-                    case "waiter": users.add(new Waiter(splitLine[0], splitLine[1], Role.WAITER));
-                    case "cook": users.add(new Cook(splitLine[0], splitLine[1], Role.COOK));
+                    case "waiter": users.add(new Waiter(splitLine[0], splitLine[1], Role.WAITER));break;
+                    case "cook": users.add(new Cook(splitLine[0], splitLine[1], Role.COOK));break;
                 }
             }
         } catch (Exception e) {
