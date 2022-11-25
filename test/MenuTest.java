@@ -9,6 +9,12 @@ public class MenuTest {
     @Test
     public void testIsMenuCreated() {
         Menu menu = new Menu("Menu.csv");
+        int DishItemsCount = menu.getDishItems().size();
+        int DrinkItemsCount = menu.getDrinkItems().size();
+        boolean isExistsDishItemsCount=DishItemsCount>0;
+        boolean isExistsDrinkItemsCount=DrinkItemsCount>0;
+
+        assertTrue(isExistsDishItemsCount && isExistsDrinkItemsCount);
     }
     @Test
     public void testIsDrinkMenuItemAdded() {
