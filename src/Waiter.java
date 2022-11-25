@@ -79,9 +79,16 @@ public class Waiter extends User{
         System.out.print("Enter dish price: ");
         double price = scan.nextDouble();
         DishType.printDishTypes();
-        System.out.print("Enter the number of the dish type: ");
-        int dishTypeNumber = scan.nextInt();
-        DishType dishType = DishType.getDishTypeByNumber(dishTypeNumber);
+        int dishTypeNumber;
+        while (true){
+            System.out.print("Enter the number of the dish type: ");
+            dishTypeNumber = scan.nextInt();
+            if (dishTypeNumber <= DishType.values().length){
+                break;
+            }
+            System.out.println("Invalid input. Try again.");
+        }
+        DishType dishType = DishType.getDishTypeByNumber(Math.abs(dishTypeNumber));
         System.out.print("Enter dish weight in grams: ");
         int weight = scan.nextInt();
         return new Dish(name, price, dishType, weight);
@@ -93,9 +100,16 @@ public class Waiter extends User{
         System.out.print("Enter drink price: ");
         double price = scan.nextDouble();
         DrinkType.printDrinkTypes();
-        System.out.print("Enter the number of the drink type: ");
-        int drinkTypeNumber = scan.nextInt();
-        DrinkType drinkType = DrinkType.getDrinkTypeByNumber(drinkTypeNumber);
+        int drinkTypeNumber;
+        while (true){
+            System.out.print("Enter the number of the drink type: ");
+            drinkTypeNumber = scan.nextInt();
+            if (drinkTypeNumber <= DrinkType.values().length){
+                break;
+            }
+            System.out.println("Invalid input. Try again.");
+        }
+        DrinkType drinkType = DrinkType.getDrinkTypeByNumber(Math.abs(drinkTypeNumber));
         System.out.print("Enter drink volume in ml: ");
         int ml = scan.nextInt();
         return new Drink(name, price, drinkType, ml);
@@ -185,9 +199,17 @@ public class Waiter extends User{
             }
             case 3 ->{
                 if (restaurant.orderList.orders.get(orderNumber).getStatus().equals(OrderStatus.TAKING)) {
-                    System.out.print("Enter the number of the item you want to remove: ");
-                    int itemNumber = scan.nextInt();
+                    int itemNumber;
+                    while (true){
+                        System.out.print("Enter the number of the item you want to remove: ");
+                        itemNumber = scan.nextInt();
+                        if (itemNumber <= restaurant.orderList.orders.get(orderNumber).getOrderedItems().size()){
+                            break;
+                        }
+                        System.out.println("There is no such item.");
+                    }
                     restaurant.orderList.orders.get(orderNumber).deleteOrderedItem(itemNumber);
+                    System.out.println("The item was deleted.");
                     restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                     editOrder(restaurant, orderNumber);
                 }else{
