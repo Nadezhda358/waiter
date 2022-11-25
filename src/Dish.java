@@ -5,7 +5,7 @@ public class Dish extends MenuItem{
     public Dish(String name, double price, DishType dishType, int weightInGrams) {
         super(name, price);
         this.dishType = dishType;
-        this.weightInGrams = weightInGrams;
+        this.weightInGrams = Math.abs(weightInGrams);
     }
 
     public DishType getDishType() {

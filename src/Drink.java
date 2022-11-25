@@ -5,7 +5,7 @@ public class Drink extends MenuItem{
     public Drink(String name, double price, DrinkType drinkType, int volumeInMl) {
         super(name, price);
         this.drinkType = drinkType;
-        this.volumeInMl = volumeInMl;
+        this.volumeInMl = Math.abs(volumeInMl);
     }
 
     public DrinkType getDrinkType() {

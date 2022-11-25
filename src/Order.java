@@ -105,7 +105,7 @@ public class Order {
             System.out.println("There is no order from that table.");
         } else if (getStatus().equals(OrderStatus.TAKING)) {
             setStatus(OrderStatus.TAKEN);
-            System.out.println("The order is taken. It can't be changed anymore.");
+            System.out.println("The order is taken.");
         } else if (getStatus().equals(OrderStatus.COOKED)) {
             setStatus(OrderStatus.SERVED);
             System.out.println("The order is served.");

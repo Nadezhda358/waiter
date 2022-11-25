@@ -5,7 +5,7 @@ public enum Role {
         Role[] roles = Role.values();
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < roles.length; i++) {
-            builder.append(roles[i]);
+            builder.append(roles[i].toString().toLowerCase());
             if (i != roles.length - 1){
                 builder.append(", ");
             }
