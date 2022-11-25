@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         Restaurant restaurant = new Restaurant();
+        restaurant.menu.printMenu();
 
 
         //Checks when deletes order item with more, then one counts
@@ -12,8 +13,8 @@ public class Main {
         Order currentOrder = restaurant.orderList.orders.get(table-1);
         currentOrder.printOrder();
         int orderItemToDelete = 4;
-        /*currentOrder.deleteOrderedItem(orderItemToDelete);
-        currentOrder.printOrder();*/
+        currentOrder.deleteOrderedItem(orderItemToDelete);
+        currentOrder.printOrder();
 
         //Checks if deletes order item with one count
         currentOrder.printOrder();
