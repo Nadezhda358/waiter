@@ -95,7 +95,7 @@ public class Menu {
         }
     }
 
-    public void sortMenuItems() {
+    private void sortMenuItems() {
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
             dishItem.getValue().sort(Comparator
                     .comparing(MenuItem::getName)
@@ -126,8 +126,6 @@ public class Menu {
     public Dish getDishItemByNumber(int dishNumber) {
         int currentNum = 0;
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
-            //System.out.println("\t" + dishItem.getKey() + "S");
-
             for (int i = 0; i < dishItem.getValue().size(); i++) {
                 currentNum++;
                 if (currentNum == dishNumber) {
