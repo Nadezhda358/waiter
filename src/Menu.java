@@ -10,17 +10,12 @@ public class Menu {
     public EnumMap<DishType, ArrayList<Dish>> getDishItems() {
         return dishItems;
     }
-    public void setDishItems(EnumMap<DishType, ArrayList<Dish>> dishItems) {
-        this.dishItems = dishItems;
-    }
+
 
     public EnumMap<DrinkType, ArrayList<Drink>> getDrinkItems() {
         return drinkItems;
     }
 
-    public void setDrinkItems(EnumMap<DrinkType, ArrayList<Drink>> drinkItems) {
-        this.drinkItems = drinkItems;
-    }
 
     public Menu() {
         this.dishItems = new EnumMap<>(DishType.class);
@@ -86,7 +81,7 @@ public class Menu {
         System.out.println("\n***** DISHES *****");
         int currentNum = 0;
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
-            System.out.println("\t" + dishItem.getKey());
+            System.out.println("\t--" + dishItem.getKey() + "--");
 
             for (int i = 0; i < dishItem.getValue().size(); i++) {
                 currentNum++;
@@ -95,7 +90,7 @@ public class Menu {
         }
     }
 
-    public void sortMenuItems() {
+    private void sortMenuItems() {
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
             dishItem.getValue().sort(Comparator
                     .comparing(MenuItem::getName)
@@ -126,8 +121,6 @@ public class Menu {
     public Dish getDishItemByNumber(int dishNumber) {
         int currentNum = 0;
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
-            //System.out.println("\t" + dishItem.getKey() + "S");
-
             for (int i = 0; i < dishItem.getValue().size(); i++) {
                 currentNum++;
                 if (currentNum == dishNumber) {
@@ -150,8 +143,6 @@ public class Menu {
     public Drink getDrinkItemByNumber(int drinkNumber) {
         int currentNum = 0;
         for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
-            //System.out.println("\t" + dishItem.getKey() + "S");
-
             for (int i = 0; i < drinkItem.getValue().size(); i++) {
                 currentNum++;
                 if (currentNum == drinkNumber) {
@@ -170,15 +161,13 @@ public class Menu {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
-            for (int i = 0; i < dishItem.getValue().size(); i++) {
-                fileWriter.println(dishItem.getKey().name() + ","
-                        + dishItem.getValue().get(i).getName() + "," +
-                        dishItem.getValue().get(i).getPrice() + "," +
-                        dishItem.getValue().get(i).getWeightInGrams());
-            }
-        }
+        SaveDishes(fileWriter);
         fileWriter.println("Drinks");
+        SaveDrinks(fileWriter);
+        fileWriter.close();
+    }
+
+    private void SaveDrinks(PrintStream fileWriter) {
         for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
             for (int i = 0; i < drinkItem.getValue().size(); i++) {
                 fileWriter.println(drinkItem.getKey().name() + ","
@@ -187,8 +176,17 @@ public class Menu {
                         drinkItem.getValue().get(i).getVolumeInMl());
             }
         }
-        fileWriter.close();
+    }
 
+    private void SaveDishes(PrintStream fileWriter) {
+        for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
+            for (int i = 0; i < dishItem.getValue().size(); i++) {
+                fileWriter.println(dishItem.getKey().name() + ","
+                        + dishItem.getValue().get(i).getName() + "," +
+                        dishItem.getValue().get(i).getPrice() + "," +
+                        dishItem.getValue().get(i).getWeightInGrams());
+            }
+        }
     }
 
     @Override
