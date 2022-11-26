@@ -1,4 +1,7 @@
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -63,10 +66,11 @@ public class Order {
     }
 
     public void printOrder() {
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
-        String formattedDate = this.dateOfOrder.format(formatDate);
-        System.out.println("\n-- O R D E R -- in Table " + this.tableNumber + " is " + this.getStatus() + "\nCreated on " + formattedDate);
-        System.out.println("----------------------------------------");
+        printOrderHeader();
+        printOrderBody();
+    }
+
+    private void printOrderBody() {
         double totalOrderSum = 0;
         int orderItemNumber = 0;
         for (OrderItem item : this.orderedItems) {
@@ -77,6 +81,32 @@ public class Order {
         }
         System.out.println("----------------------------------------");
         System.out.printf("%-15sOrder's total: %.2f lv.\n", "", totalOrderSum);
+    }
+
+    private void printOrderHeader() {
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+        String formattedDate = this.dateOfOrder.format(formatDate);
+
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_RED = "\u001B[31m";
+
+        LocalDateTime startDate = LocalDateTime.parse(formattedDate, formatDate);
+        LocalDateTime endDate = LocalDateTime.parse(LocalDateTime.now().format(formatDate),formatDate);
+        if (isDifferenceInTimeMoreThen30Minutes(startDate,endDate) && this.status != OrderStatus.SERVED) {
+            System.out.println("\n"+ANSI_RED+"-- O R D E R -- in Table " + this.tableNumber + " is " + this.getStatus() +ANSI_RESET+ "\n" + ANSI_RED + "Created on " + formattedDate +" - NOT served in "+getDifferenceInMinutes(startDate,endDate)+" minutes" + ANSI_RESET);
+        }else
+        {
+            System.out.println("\n-- O R D E R -- in Table " + this.tableNumber + " is " + this.getStatus() + "\n"  + "Created on " + formattedDate);
+        }
+        System.out.println("----------------------------------------");
+    }
+
+    private boolean isDifferenceInTimeMoreThen30Minutes(LocalDateTime start_date, LocalDateTime end_date) {
+        Duration diff = Duration.between(start_date, end_date);
+        return diff.toMinutes() > 30;
+    }
+    private long getDifferenceInMinutes(LocalDateTime start_date, LocalDateTime end_date) {
+        return Duration.between(start_date, end_date).toMinutes();
     }
 
     public void printOrderBill() {
@@ -93,6 +123,7 @@ public class Order {
         System.out.println("--------------------------------------------------------");
         System.out.printf("%-40sTotal: %.2f lv.\n", "", totalOrderSum);
     }
+
     public void changeStatusWaiter() {
         if (getStatus().equals(OrderStatus.PAYED)) {
             System.out.println("There is no order from that table.");
