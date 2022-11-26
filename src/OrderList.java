@@ -57,14 +57,14 @@ public class OrderList {
         }
     }
 
-    public void PrintOrderList() {
+    public void printOrderList() {
         for (Order order : this.orders) {
             if (order.getStatus() != OrderStatus.PAYED) {
                 order.printOrder();
             }
         }
     }
-    public void PrintWaiterOrderListToChangeStatus() {
+    public void printWaiterOrderList() {
         for (Order order : this.orders) {
             if (order.getStatus() != OrderStatus.PAYED &&
                     order.getStatus() != OrderStatus.COOKING &&
@@ -73,7 +73,7 @@ public class OrderList {
             }
         }
     }
-    public void PrintCookOrderList() {
+    public void printCookOrderList() {
         for (Order order : this.orders) {
             if (order.getStatus() != OrderStatus.PAYED &&
                     order.getStatus() != OrderStatus.TAKING &&

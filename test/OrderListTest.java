@@ -13,18 +13,18 @@ public class OrderListTest {
     public void testPrintCookOrderList(){
         Menu menu = new Menu("NewMenu.csv");
         OrderList orderList = new OrderList("NewOrders.csv",menu);
-        orderList.PrintCookOrderList();
+        orderList.printCookOrderList();
     }
     @Test
     public void testPrintOrderList(){
         Menu menu = new Menu("NewMenu.csv");
         OrderList orderList = new OrderList("NewOrders.csv",menu);
-        orderList.PrintOrderList();
+        orderList.printOrderList();
     }
     @Test
     public void testPrintWaiterOrderListToChangeStatus(){
         Menu menu = new Menu("NewMenu.csv");
         OrderList orderList = new OrderList("NewOrders.csv",menu);
-        orderList.PrintWaiterOrderListToChangeStatus();
+        orderList.printWaiterOrderList();
     }
 }
