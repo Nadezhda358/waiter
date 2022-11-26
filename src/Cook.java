@@ -8,20 +8,18 @@ public class Cook extends User{
 
     @Override
     public void display(Restaurant restaurant) {
-        Scanner scan = new Scanner(System.in);
         System.out.println("1. Active orders\n2. Change order status\n3. Back");
-        System.out.print("Enter your choice(1-3): ");
-        int choice = scan.nextInt();
+        int choice = readNumber("Enter your choice(1-3): ");
         switch (choice) {
             case 1 -> {
                 restaurant.orderList.PrintCookOrderList();
                 display(restaurant);
             }
             case 2 -> {
-                System.out.print("Witch table's order status do you want to edit?\nEnter the number: ");
-                int tableNumber = scan.nextInt();
-                if (tableNumber <= restaurant.getTablesCount()) {
-                    restaurant.orderList.orders.get(tableNumber - 1).changeStatusCook();
+                System.out.print("Witch table's order status do you want to edit?");
+                int tableNumber = readNumber("\nEnter the number: ");
+                if (tableNumber <= restaurant.getTablesCount() && tableNumber > 0) {
+                    restaurant.orderList.orders.get(Math.abs(tableNumber) - 1).changeStatusCook();
                 }else{
                     System.out.println("There is no such table.");
                 }

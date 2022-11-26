@@ -2,7 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Login {
+public class Login implements Loggable{
     public static void printStartMenu(Restaurant restaurant) {
         Scanner scan = new Scanner(System.in);
         System.out.println("1. Sign in\n2. Login\n3. Exit.");

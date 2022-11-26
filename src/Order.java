@@ -99,7 +99,6 @@ public class Order {
         System.out.printf("%-40sTotal: %.2f lv.\n", emptyString, totalOrderSum);
 
     }
-
     public void changeStatusWaiter() {
         if (getStatus().equals(OrderStatus.PAYED)) {
             System.out.println("There is no order from that table.");

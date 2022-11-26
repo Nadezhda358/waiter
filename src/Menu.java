@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.*;
 
-public class Menu {
+public class Menu implements Deletable, Addable, Gettable{
     private EnumMap<DishType, ArrayList<Dish>> dishItems;
     private EnumMap<DrinkType, ArrayList<Drink>> drinkItems;
 
@@ -111,7 +111,7 @@ public class Menu {
         this.drinkItems.computeIfAbsent(drinkToAdd.getDrinkType(), k -> new ArrayList<>()).add(drinkToAdd);
     }
     public void deleteDishItemByNumber(int dishNumber) {
-        if (dishNumber <= dishItems.get(DishType.SOUP).size() + dishItems.get(DishType.SALAD).size() + dishItems.get(DishType.GRILL).size() + dishItems.get(DishType.DESSERT).size()){
+        if (dishNumber <= dishItems.get(DishType.SOUP).size() + dishItems.get(DishType.SALAD).size() + dishItems.get(DishType.GRILL).size() + dishItems.get(DishType.DESSERT).size() && dishNumber > 0){
             Dish dishToDelete = getDishItemByNumber(dishNumber);
             this.dishItems.get(dishToDelete.getDishType()).remove(dishToDelete);
         }else {
@@ -127,13 +127,12 @@ public class Menu {
                     return dishItem.getValue().get(i);
                 }
             }
-
         }
         return null;
     }
 
     public void deleteDrinkItemByNumber(int drinkNumber) {
-        if (drinkNumber <= drinkItems.get(DrinkType.HOT).size() + drinkItems.get(DrinkType.ALCOHOLIC).size() + drinkItems.get(DrinkType.NONALCOHOLIC).size() + drinkItems.get(DrinkType.COCKTAIL).size()){
+        if (drinkNumber <= drinkItems.get(DrinkType.HOT).size() + drinkItems.get(DrinkType.ALCOHOLIC).size() + drinkItems.get(DrinkType.NONALCOHOLIC).size() + drinkItems.get(DrinkType.COCKTAIL).size() && drinkNumber > 0){
             Drink drinkToDelete = getDrinkItemByNumber(drinkNumber);
             this.drinkItems.get(drinkToDelete.getDrinkType()).remove(drinkToDelete);
         }else{
