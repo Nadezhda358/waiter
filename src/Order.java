@@ -12,9 +12,6 @@ public class Order {
         this.dateOfOrder = dateOfOrder;
     }
 
-    public void setStatusServed() {
-        this.status = OrderStatus.SERVED;
-    }
 
     public Order(int tableNumber) {
         this.tableNumber = tableNumber;
@@ -58,10 +55,10 @@ public class Order {
     }
 
     public void deleteOrderedItem(int numberOfOrderedItem) {
-        if (orderedItems.get(numberOfOrderedItem-1).getCount() == 1) {
+        if (orderedItems.get(numberOfOrderedItem - 1).getCount() == 1) {
             orderedItems.remove(numberOfOrderedItem - 1);
         } else {
-            orderedItems.get(numberOfOrderedItem-1).setCount(orderedItems.get(numberOfOrderedItem-1).getCount() - 1);
+            orderedItems.get(numberOfOrderedItem - 1).setCount(orderedItems.get(numberOfOrderedItem - 1).getCount() - 1);
         }
     }
 
@@ -79,8 +76,7 @@ public class Order {
             System.out.println(orderItemNumber + ". " + item);
         }
         System.out.println("----------------------------------------");
-        String emptyString = "";
-        System.out.printf("%-15sOrder's total: %.2f lv.\n", emptyString, totalOrderSum);
+        System.out.printf("%-15sOrder's total: %.2f lv.\n", "", totalOrderSum);
     }
 
     public void printOrderBill() {
@@ -95,9 +91,7 @@ public class Order {
             totalOrderSum += itemSum;
         }
         System.out.println("--------------------------------------------------------");
-        String emptyString = "";
-        System.out.printf("%-40sTotal: %.2f lv.\n", emptyString, totalOrderSum);
-
+        System.out.printf("%-40sTotal: %.2f lv.\n", "", totalOrderSum);
     }
 
     public void changeStatusWaiter() {
@@ -113,7 +107,6 @@ public class Order {
             setStatus(OrderStatus.PAYED);
             printOrderBill();
             this.orderedItems = new ArrayList<>();
-
         } else {
             System.out.println("You can't change the status of that order.");
         }
@@ -132,14 +125,4 @@ public class Order {
             System.out.println("You can't change the status of that order.");
         }
     }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderedItems=" + orderedItems +
-                ", dateOfOrder=" + dateOfOrder +
-                ", status=" + status +
-                '}';
-    }
 }
-

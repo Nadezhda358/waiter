@@ -1,4 +1,4 @@
-public class Dish extends MenuItem{
+public class Dish extends MenuItem {
     private DishType dishType;
     private int weightInGrams;
 
@@ -12,20 +12,12 @@ public class Dish extends MenuItem{
         return dishType;
     }
 
-    public void setDishType(DishType dishType) {
-        this.dishType = dishType;
-    }
-
     public int getWeightInGrams() {
         return weightInGrams;
     }
 
-    public void setWeightInGrams(int weightInGrams) {
-        this.weightInGrams = weightInGrams;
-    }
-
     @Override
     public String toString() {
-        return String.format("%s (%d g) - %.2f lv.",this.name,this.weightInGrams,this.price);
+        return String.format("%s (%d g) - %.2f lv.", this.name, this.weightInGrams, this.price);
     }
 }
