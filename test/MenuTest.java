@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -93,6 +91,23 @@ public class MenuTest {
         Drink expectedDrink = r.menu.getDrinkItemByNumber(1);
 
         assertEquals(checkedDrink, expectedDrink);
+    }
+    @Test
+    public void testIsGetNameMenuItemCorrect() {
+        Menu menu = new Menu("NewMenu.csv");
+        OrderList orderList = new OrderList("NewOrders.csv",menu);
+        String actualName = menu.getDishItems().get(DishType.SOUP).get(0).getName();
+        String expectedName = "Chicken soup";
+
+        assertEquals(expectedName,actualName);
+    }
+    @Test
+    public void testIsGetPriceMenuItemCorrect() {
+        Menu menu = new Menu("NewMenu.csv");
+        double actualPrice = menu.getDishItems().get(DishType.SOUP).get(0).getPrice();
+        double expectedPrice = 1.99;
+
+        assertEquals(expectedPrice,actualPrice);
     }
     @Test
     public void testIsGetDrinkItemByNumberNotCorrect() {

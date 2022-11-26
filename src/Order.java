@@ -55,10 +55,10 @@ public class Order {
     }
 
     public void deleteOrderedItem(int numberOfOrderedItem) {
-        if (orderedItems.get(numberOfOrderedItem-1).getCount() == 1) {
+        if (orderedItems.get(numberOfOrderedItem - 1).getCount() == 1) {
             orderedItems.remove(numberOfOrderedItem - 1);
         } else {
-            orderedItems.get(numberOfOrderedItem-1).setCount(orderedItems.get(numberOfOrderedItem-1).getCount() - 1);
+            orderedItems.get(numberOfOrderedItem - 1).setCount(orderedItems.get(numberOfOrderedItem - 1).getCount() - 1);
         }
     }
 
@@ -126,4 +126,3 @@ public class Order {
         }
     }
 }
-

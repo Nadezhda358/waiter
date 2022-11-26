@@ -12,9 +12,10 @@ public enum DishType {
         this.textRepresentation = textRepresentation;
     }
 
-     public static DishType getDishTypeByNumber(int num){
-        return Arrays.stream(DishType.values()).toList().get(num-1);
+    public static DishType getDishTypeByNumber(int num) {
+        return Arrays.stream(DishType.values()).toList().get(num - 1);
     }
+
     @Override
     public String toString() {
         return textRepresentation;

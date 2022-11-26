@@ -26,7 +26,7 @@ public class Cook extends User{
                     System.out.println("There is no such table.");
                 }
                 try {
-                    restaurant.orderList.SaveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                    restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }

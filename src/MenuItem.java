@@ -6,6 +6,7 @@ public abstract class MenuItem {
         this.name = name;
         this.price = Math.abs(price);
     }
+
     public String getName() {
         return name;
     }
