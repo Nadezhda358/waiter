@@ -114,7 +114,12 @@ public class Menu implements Deletable, Addable, Gettable{
         this.drinkItems.computeIfAbsent(drinkToAdd.getDrinkType(), k -> new ArrayList<>()).add(drinkToAdd);
     }
     public void deleteDishItemByNumber(int dishNumber) {
-        if (dishNumber <= dishItems.get(DishType.SOUP).size() + dishItems.get(DishType.SALAD).size() + dishItems.get(DishType.GRILL).size() + dishItems.get(DishType.DESSERT).size() && dishNumber > 0){
+        int dishCount=0;
+        for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
+            dishCount += dishItem.getValue().size();
+        }
+
+        if (dishNumber <= dishCount && dishNumber > 0){
             Dish dishToDelete = getDishItemByNumber(dishNumber);
             this.dishItems.get(dishToDelete.getDishType()).remove(dishToDelete);
         }else {
@@ -135,7 +140,11 @@ public class Menu implements Deletable, Addable, Gettable{
     }
 
     public void deleteDrinkItemByNumber(int drinkNumber) {
-        if (drinkNumber <= drinkItems.get(DrinkType.HOT).size() + drinkItems.get(DrinkType.ALCOHOLIC).size() + drinkItems.get(DrinkType.NONALCOHOLIC).size() + drinkItems.get(DrinkType.COCKTAIL).size() && drinkNumber > 0){
+        int drinksCount=0;
+        for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
+            drinksCount += drinkItem.getValue().size();
+        }
+        if (drinkNumber <= drinksCount && drinkNumber > 0){
             Drink drinkToDelete = getDrinkItemByNumber(drinkNumber);
             this.drinkItems.get(drinkToDelete.getDrinkType()).remove(drinkToDelete);
         }else{
