@@ -12,16 +12,8 @@ public class Drink extends MenuItem{
         return drinkType;
     }
 
-    public void setDrinkType(DrinkType drinkType) {
-        this.drinkType = drinkType;
-    }
-
     public int getVolumeInMl() {
         return volumeInMl;
-    }
-
-    public void setVolumeInMl(int volumeInMl) {
-        this.volumeInMl = volumeInMl;
     }
 
     @Override

@@ -188,11 +188,4 @@ public class Menu {
             }
         }
     }
-
-    @Override
-    public String toString() {
-        return "MENU\n" +
-                this.dishItems.keySet() + "\n" + this.dishItems +
-                '}';
-    }
 }

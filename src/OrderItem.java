@@ -10,11 +10,6 @@ public class OrderItem {
     public MenuItem getItem() {
         return item;
     }
-
-    public void setItem(MenuItem item) {
-        this.item = item;
-    }
-
     public int getCount() {
         return count;
     }
@@ -27,8 +22,4 @@ public class OrderItem {
     public String toString() {
         return this.count + " x " + this.item;
     }
-
-    //public String toString(int i) {
-     //   return this.count + " x " + this.item;
-   // }
 }

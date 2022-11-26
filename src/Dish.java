@@ -12,16 +12,8 @@ public class Dish extends MenuItem{
         return dishType;
     }
 
-    public void setDishType(DishType dishType) {
-        this.dishType = dishType;
-    }
-
     public int getWeightInGrams() {
         return weightInGrams;
-    }
-
-    public void setWeightInGrams(int weightInGrams) {
-        this.weightInGrams = weightInGrams;
     }
 
     @Override

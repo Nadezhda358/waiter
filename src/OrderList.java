@@ -12,7 +12,6 @@ public class OrderList {
         try {
             File ordersFile = new File(fileName);
             Scanner fileReader = new Scanner(ordersFile, "windows-1251");
-            //String orderRow = fileReader.nextLine();
             while (fileReader.hasNextLine()) {
                 String orderRow = fileReader.nextLine();
                 String[] orderRowArray = orderRow.split(",");
@@ -95,15 +94,6 @@ public class OrderList {
                 fileWriter.print("\n");
             }
         }
-
         fileWriter.close();
-
-    }
-
-    @Override
-    public String toString() {
-        return "OrderList{" +
-                "orders=" + orders +
-                '}';
     }
 }
