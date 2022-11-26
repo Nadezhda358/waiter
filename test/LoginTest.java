@@ -37,14 +37,18 @@ class LoginTest {
     public void testIsNameTakenWithNameTakenByUserWithSameRole() {
         assertTrue(Login.isNameTaken("Ivan,456,cook", new Restaurant()));
     }
-    //@Test
-    //public void testSighUpWithNewUser() {
-    //    Restaurant restaurant = new Restaurant();
-    //    String userInfo = "User,user123,waiter";
-    //    Login.signUp(userInfo, restaurant);
-    //    String actualUserInfo = restaurant.users.get(restaurant.users.size()-1).getUsername() + "," + restaurant.users.get(restaurant.users.size()-1).getPassword() + "," + Role.WAITER;
-    //    assertEquals("User,user123,WAITER", actualUserInfo);
-    //}
+    @Test
+    public void testSighUpWithNewUser() {
+        Restaurant restaurant = new Restaurant();
+        restaurant.usersInfoFileName = "testUsersInfo.txt";
+        Random rand = new Random();
+
+        String userInfo = rand.nextInt(1000) + ",user123,waiter";
+        int usersCountBeforeAdding = restaurant.users.size();
+        Login.signUp(userInfo, restaurant);
+        int usersCountAfterAdding = restaurant.users.size();
+        assertEquals(usersCountBeforeAdding + 1, usersCountAfterAdding);
+    }
     //@Test
     //public void testSighUpWithUserWithNameIsAlreadyUsed() {
     //    Restaurant restaurant = new Restaurant();

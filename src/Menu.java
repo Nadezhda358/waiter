@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.*;
 
-public class Menu {
+public class Menu implements Deletable, Addable, Gettable{
     private EnumMap<DishType, ArrayList<Dish>> dishItems;
     private EnumMap<DrinkType, ArrayList<Drink>> drinkItems;
 
@@ -11,9 +11,17 @@ public class Menu {
         return dishItems;
     }
 
+
     public EnumMap<DrinkType, ArrayList<Drink>> getDrinkItems() {
         return drinkItems;
     }
+
+
+    public Menu() {
+        this.dishItems = new EnumMap<>(DishType.class);
+        this.drinkItems = new EnumMap<>(DrinkType.class);
+    }
+
 
     public Menu(String fileName) {
         this.dishItems = new EnumMap<>(DishType.class);
@@ -21,39 +29,31 @@ public class Menu {
         try {
             File menuItemsFile = new File(fileName);
             Scanner fileReader = new Scanner(menuItemsFile, "windows-1251");
-            readDishes(fileReader);
-            readDrinks(fileReader);
+            String menuRow = fileReader.nextLine();
+            while (!menuRow.equals("Drinks")) {
+                String[] line = menuRow.split(",");
+                DishType type = DishType.valueOf(line[0]);
+                String name = line[1];
+                double price = Double.parseDouble(line[2]);
+                int weight = Integer.parseInt(line[3]);
+                Dish dishItem = new Dish(name, price, type, weight);
+                addDishItem(dishItem);
+                menuRow = fileReader.nextLine();
+            }
+            while (fileReader.hasNextLine()) {
+                menuRow = fileReader.nextLine();
+                String[] line = menuRow.split(",");
+                DrinkType type = DrinkType.valueOf(line[0]);
+                String name = line[1];
+                double price = Double.parseDouble(line[2]);
+                int volumeMl = Integer.parseInt(line[3]);
+                Drink drinkItem = new Drink(name, price, type, volumeMl);
+                addDrinkItem(drinkItem);
+            }
             fileReader.close();
+
         } catch (Exception e) {
             System.out.println("Menu items file " + fileName + " not found!");
-        }
-    }
-
-    private void readDrinks(Scanner fileReader) {
-        String menuRow;
-        while (fileReader.hasNextLine()) {
-            menuRow = fileReader.nextLine();
-            String[] line = menuRow.split(",");
-            DrinkType type = DrinkType.valueOf(line[0]);
-            String name = line[1];
-            double price = Double.parseDouble(line[2]);
-            int volumeMl = Integer.parseInt(line[3]);
-            Drink drinkItem = new Drink(name, price, type, volumeMl);
-            addDrinkItem(drinkItem);
-        }
-    }
-
-    private void readDishes(Scanner fileReader) {
-        String menuRow = fileReader.nextLine();
-        while (!menuRow.equals("Drinks")) {
-            String[] line = menuRow.split(",");
-            DishType type = DishType.valueOf(line[0]);
-            String name = line[1];
-            double price = Double.parseDouble(line[2]);
-            int weight = Integer.parseInt(line[3]);
-            Dish dishItem = new Dish(name, price, type, weight);
-            addDishItem(dishItem);
-            menuRow = fileReader.nextLine();
         }
     }
 
@@ -110,16 +110,14 @@ public class Menu {
     public void addDrinkItem(Drink drinkToAdd) {
         this.drinkItems.computeIfAbsent(drinkToAdd.getDrinkType(), k -> new ArrayList<>()).add(drinkToAdd);
     }
-
     public void deleteDishItemByNumber(int dishNumber) {
-        if (dishNumber <= dishItems.get(DishType.SOUP).size() + dishItems.get(DishType.SALAD).size() + dishItems.get(DishType.GRILL).size() + dishItems.get(DishType.DESSERT).size()) {
+        if (dishNumber <= dishItems.get(DishType.SOUP).size() + dishItems.get(DishType.SALAD).size() + dishItems.get(DishType.GRILL).size() + dishItems.get(DishType.DESSERT).size() && dishNumber > 0){
             Dish dishToDelete = getDishItemByNumber(dishNumber);
             this.dishItems.get(dishToDelete.getDishType()).remove(dishToDelete);
-        } else {
+        }else {
             System.out.println("There is no such dish.");
         }
     }
-
     public Dish getDishItemByNumber(int dishNumber) {
         int currentNum = 0;
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
@@ -129,20 +127,18 @@ public class Menu {
                     return dishItem.getValue().get(i);
                 }
             }
-
         }
         return null;
     }
 
     public void deleteDrinkItemByNumber(int drinkNumber) {
-        if (drinkNumber <= drinkItems.get(DrinkType.HOT).size() + drinkItems.get(DrinkType.ALCOHOLIC).size() + drinkItems.get(DrinkType.NONALCOHOLIC).size() + drinkItems.get(DrinkType.COCKTAIL).size()) {
+        if (drinkNumber <= drinkItems.get(DrinkType.HOT).size() + drinkItems.get(DrinkType.ALCOHOLIC).size() + drinkItems.get(DrinkType.NONALCOHOLIC).size() + drinkItems.get(DrinkType.COCKTAIL).size() && drinkNumber > 0){
             Drink drinkToDelete = getDrinkItemByNumber(drinkNumber);
             this.drinkItems.get(drinkToDelete.getDrinkType()).remove(drinkToDelete);
-        } else {
+        }else{
             System.out.println("There is no such drink.");
         }
     }
-
     public Drink getDrinkItemByNumber(int drinkNumber) {
         int currentNum = 0;
         for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
@@ -156,7 +152,7 @@ public class Menu {
         return null;
     }
 
-    public void saveMenuToFile(String fileName) {
+    public void saveMenuToFile(String fileName){
         this.sortMenuItems();
         PrintStream fileWriter = null;
         try {
@@ -190,5 +186,12 @@ public class Menu {
                         dishItem.getValue().get(i).getWeightInGrams());
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "MENU\n" +
+                this.dishItems.keySet() + "\n" + this.dishItems +
+                '}';
     }
 }

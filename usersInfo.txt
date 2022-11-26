@@ -1,3 +1,4 @@
 Nadezhda,Nadezhda123,waiter
 Ivan,ivan456,cook
-User,user123,waiter
+name,password,waiter
+eedr12,ddgfbv,cook

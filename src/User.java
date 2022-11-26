@@ -1,27 +1,18 @@
-public abstract class User {
+import java.util.Scanner;
+
+public abstract class User implements Displayable{
     private String username;
     private String password;
     private Role role;
     public String getUsername() {
         return username;
     }
-    public void setUsername(String username) {
-        this.username = username;
-    }
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Role getRole() {
         return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public User(String username, String password, Role role) {
@@ -29,5 +20,21 @@ public abstract class User {
         this.password = password;
         this.role = role;
     }
-    public abstract void display(Restaurant restaurant);
+    public static int readNumber(String message) {
+        Scanner scan = new Scanner(System.in);
+        boolean isNumber;
+        int number = 0;
+        do {
+            System.out.print(message);
+            if (scan.hasNextInt()) {
+                number = scan.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Invalid input.");
+                isNumber = false;
+                scan.next();
+            }
+        } while (!isNumber);
+        return number;
+    }
 }

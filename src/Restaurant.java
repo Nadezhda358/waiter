@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Restaurant {
     String menuFileName = "Menu.csv";
     String orderListFileName = "Orders.csv";
+    String usersInfoFileName = "usersInfo.txt";
     private int tablesCount;
     public Menu menu;
     public OrderList orderList;
@@ -35,17 +36,20 @@ public class Restaurant {
 
     public void setUsers() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("usersInfo.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(usersInfoFileName));
             String line;
             while ((line = reader.readLine()) != null){
-                String[] splitLine = line.split(",");
-                switch (splitLine[2]){
-                    case "waiter": users.add(new Waiter(splitLine[0], splitLine[1], Role.WAITER));break;
-                    case "cook": users.add(new Cook(splitLine[0], splitLine[1], Role.COOK));break;
-                }
+                addUser(line, this);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+    public void addUser(String userInfo, Restaurant restaurant){
+        String[] splitUserInfo = userInfo.split(",");
+        switch (splitUserInfo[2]) {
+            case "cook" -> restaurant.users.add(new Cook(splitUserInfo[0], splitUserInfo[1], Role.COOK));
+            case "waiter" -> restaurant.users.add(new Waiter(splitUserInfo[0], splitUserInfo[1], Role.WAITER));
         }
     }
 }

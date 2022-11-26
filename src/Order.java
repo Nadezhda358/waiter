@@ -93,11 +93,10 @@ public class Order {
         System.out.println("--------------------------------------------------------");
         System.out.printf("%-40sTotal: %.2f lv.\n", "", totalOrderSum);
     }
-
     public void changeStatusWaiter() {
         if (getStatus().equals(OrderStatus.PAYED)) {
             System.out.println("There is no order from that table.");
-        } else if (getStatus().equals(OrderStatus.TAKING)) {
+        } else if (getStatus().equals(OrderStatus.TAKING) && orderedItems.size() > 0) {
             setStatus(OrderStatus.TAKEN);
             System.out.println("The order is taken.");
         } else if (getStatus().equals(OrderStatus.COOKED)) {

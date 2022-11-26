@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public enum OrderStatus {
     TAKING("taking"),
     TAKEN("taken"),

@@ -3,7 +3,7 @@ SOUP,Shkembe soup,2.49,350
 SOUP,Tarator,1.75,350
 SALAD,Shepherd's salad,6.25,500
 SALAD,Shopska salad,6.25,400
-SALAD,Village salad,5.0,450
+SALAD,a,1.0,2
 GRILL,Chicken wings,6.0,250
 GRILL,Kebabche,2.0,110
 GRILL,Kyufte,2.2,100
@@ -15,6 +15,7 @@ HOT,Tea,1.9,200
 NONALCOHOLIC,Cappy,3.0,300
 NONALCOHOLIC,Cola,2.6,250
 NONALCOHOLIC,Fanta,2.6,250
+NONALCOHOLIC,a,2133.0,22
 ALCOHOLIC,Beer Shumen,2.0,330
 ALCOHOLIC,Beer Shumen,3.0,500
 ALCOHOLIC,Rakiya Burgas 63,4.4,50
