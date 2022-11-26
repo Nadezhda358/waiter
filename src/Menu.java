@@ -4,8 +4,8 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Menu implements Deletable, Addable, Gettable{
-    private EnumMap<DishType, ArrayList<Dish>> dishItems;
-    private EnumMap<DrinkType, ArrayList<Drink>> drinkItems;
+    private final EnumMap<DishType, ArrayList<Dish>> dishItems;
+    private final EnumMap<DrinkType, ArrayList<Drink>> drinkItems;
 
     public EnumMap<DishType, ArrayList<Dish>> getDishItems() {
         return dishItems;
@@ -17,43 +17,46 @@ public class Menu implements Deletable, Addable, Gettable{
     }
 
 
-    public Menu() {
-        this.dishItems = new EnumMap<>(DishType.class);
-        this.drinkItems = new EnumMap<>(DrinkType.class);
-    }
-
-
     public Menu(String fileName) {
         this.dishItems = new EnumMap<>(DishType.class);
         this.drinkItems = new EnumMap<>(DrinkType.class);
         try {
             File menuItemsFile = new File(fileName);
             Scanner fileReader = new Scanner(menuItemsFile, "windows-1251");
-            String menuRow = fileReader.nextLine();
-            while (!menuRow.equals("Drinks")) {
-                String[] line = menuRow.split(",");
-                DishType type = DishType.valueOf(line[0]);
-                String name = line[1];
-                double price = Double.parseDouble(line[2]);
-                int weight = Integer.parseInt(line[3]);
-                Dish dishItem = new Dish(name, price, type, weight);
-                addDishItem(dishItem);
-                menuRow = fileReader.nextLine();
-            }
-            while (fileReader.hasNextLine()) {
-                menuRow = fileReader.nextLine();
-                String[] line = menuRow.split(",");
-                DrinkType type = DrinkType.valueOf(line[0]);
-                String name = line[1];
-                double price = Double.parseDouble(line[2]);
-                int volumeMl = Integer.parseInt(line[3]);
-                Drink drinkItem = new Drink(name, price, type, volumeMl);
-                addDrinkItem(drinkItem);
-            }
+            readDishes(fileReader);
+            readDrinks(fileReader);
             fileReader.close();
 
         } catch (Exception e) {
             System.out.println("Menu items file " + fileName + " not found!");
+        }
+    }
+
+    private void readDrinks(Scanner fileReader) {
+        String menuRow;
+        while (fileReader.hasNextLine()) {
+            menuRow = fileReader.nextLine();
+            String[] line = menuRow.split(",");
+            DrinkType type = DrinkType.valueOf(line[0]);
+            String name = line[1];
+            double price = Double.parseDouble(line[2]);
+            int volumeMl = Integer.parseInt(line[3]);
+            Drink drinkItem = new Drink(name, price, type, volumeMl);
+            addDrinkItem(drinkItem);
+        }
+    }
+
+    private void readDishes(Scanner fileReader) {
+        String menuRow = fileReader.nextLine();
+        while (!menuRow.equals("Drinks")) {
+            String[] line = menuRow.split(",");
+            DishType type = DishType.valueOf(line[0]);
+            String name = line[1];
+            double price = Double.parseDouble(line[2]);
+            int weight = Integer.parseInt(line[3]);
+            Dish dishItem = new Dish(name, price, type, weight);
+            addDishItem(dishItem);
+            menuRow = fileReader.nextLine();
         }
     }
 
@@ -154,19 +157,19 @@ public class Menu implements Deletable, Addable, Gettable{
 
     public void saveMenuToFile(String fileName){
         this.sortMenuItems();
-        PrintStream fileWriter = null;
+        PrintStream fileWriter;
         try {
             fileWriter = new PrintStream(fileName);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        SaveDishes(fileWriter);
+        saveDishes(fileWriter);
         fileWriter.println("Drinks");
-        SaveDrinks(fileWriter);
+        saveDrinks(fileWriter);
         fileWriter.close();
     }
 
-    private void SaveDrinks(PrintStream fileWriter) {
+    private void saveDrinks(PrintStream fileWriter) {
         for (Map.Entry<DrinkType, ArrayList<Drink>> drinkItem : this.drinkItems.entrySet()) {
             for (int i = 0; i < drinkItem.getValue().size(); i++) {
                 fileWriter.println(drinkItem.getKey().name() + ","
@@ -177,7 +180,7 @@ public class Menu implements Deletable, Addable, Gettable{
         }
     }
 
-    private void SaveDishes(PrintStream fileWriter) {
+    private void saveDishes(PrintStream fileWriter) {
         for (Map.Entry<DishType, ArrayList<Dish>> dishItem : this.dishItems.entrySet()) {
             for (int i = 0; i < dishItem.getValue().size(); i++) {
                 fileWriter.println(dishItem.getKey().name() + ","
@@ -186,12 +189,5 @@ public class Menu implements Deletable, Addable, Gettable{
                         dishItem.getValue().get(i).getWeightInGrams());
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return "MENU\n" +
-                this.dishItems.keySet() + "\n" + this.dishItems +
-                '}';
     }
 }

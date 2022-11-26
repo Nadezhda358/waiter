@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Order {
     private List<OrderItem> orderedItems;
-    private int tableNumber;
+    private final int tableNumber;
     private LocalDateTime dateOfOrder;
     private OrderStatus status;
 

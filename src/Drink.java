@@ -1,6 +1,6 @@
 public class Drink extends MenuItem {
-    private DrinkType drinkType;
-    private int volumeInMl;
+    private final DrinkType drinkType;
+    private final int volumeInMl;
 
     public Drink(String name, double price, DrinkType drinkType, int volumeInMl) {
         super(name, price);
