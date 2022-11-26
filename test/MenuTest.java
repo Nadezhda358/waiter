@@ -1,11 +1,18 @@
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MenuTest {
     @Test
     public void testIsMenuCreated() {
         Menu menu = new Menu("Menu.csv");
+        int DishItemsCount = menu.getDishItems().size();
+        int DrinkItemsCount = menu.getDrinkItems().size();
+        boolean isExistsDishItemsCount=DishItemsCount>0;
+        boolean isExistsDrinkItemsCount=DrinkItemsCount>0;
+
+        assertTrue(isExistsDishItemsCount && isExistsDrinkItemsCount);
     }
     @Test
     public void testIsDrinkMenuItemAdded() {
@@ -86,10 +93,37 @@ public class MenuTest {
         assertEquals(checkedDrink, expectedDrink);
     }
     @Test
+    public void testIsGetNameMenuItemCorrect() {
+        Menu menu = new Menu("NewMenu.csv");
+        OrderList orderList = new OrderList("NewOrders.csv",menu);
+        String actualName = menu.getDishItems().get(DishType.SOUP).get(0).getName();
+        String expectedName = "Chicken soup";
+
+        assertEquals(expectedName,actualName);
+    }
+    @Test
+    public void testIsGetPriceMenuItemCorrect() {
+        Menu menu = new Menu("NewMenu.csv");
+        double actualPrice = menu.getDishItems().get(DishType.SOUP).get(0).getPrice();
+        double expectedPrice = 1.99;
+
+        assertEquals(expectedPrice,actualPrice);
+    }
+    @Test
     public void testIsGetDrinkItemByNumberNotCorrect() {
         Restaurant r = new Restaurant();
         Drink expectedDrink = r.menu.getDrinkItemByNumber(1000);
         assertNull(expectedDrink);
+    }
+    @Test
+    public void testSaveMenuToFile() {
+        Menu menu = new Menu("NewMenu.csv");
+        menu.saveMenuToFile("NewMenu.csv");
+    }
+    @Test
+    public void testPrintMenu() {
+        Menu menu = new Menu("NewMenu.csv");
+        menu.printMenu();
     }
 }
 

@@ -11,9 +11,11 @@ public enum DrinkType {
     DrinkType(String textRepresentation) {
         this.textRepresentation = textRepresentation;
     }
-    public static DrinkType getDrinkTypeByNumber(int num){
-        return Arrays.stream(DrinkType.values()).toList().get(num-1);
+
+    public static DrinkType getDrinkTypeByNumber(int num) {
+        return Arrays.stream(DrinkType.values()).toList().get(num - 1);
     }
+
     @Override
     public String toString() {
         return textRepresentation;
