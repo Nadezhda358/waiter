@@ -7,7 +7,7 @@ public class OrderListTest {
     public void testSaveOrderListToFile() throws FileNotFoundException {
         Menu menu = new Menu("NewMenu.csv");
         OrderList orderList = new OrderList("NewOrders.csv",menu);
-        orderList.SaveOrderListToFile("NewOrders.csv",menu);
+        orderList.saveOrderListToFile("NewOrders.csv",menu);
     }
     @Test
     public void testPrintCookOrderList(){

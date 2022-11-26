@@ -100,5 +100,15 @@ public class MenuTest {
         Drink expectedDrink = r.menu.getDrinkItemByNumber(1000);
         assertNull(expectedDrink);
     }
+    @Test
+    public void testSaveMenuToFile() {
+        Menu menu = new Menu("NewMenu.csv");
+        menu.saveMenuToFile("NewMenu.csv");
+    }
+    @Test
+    public void testPrintMenu() {
+        Menu menu = new Menu("NewMenu.csv");
+        menu.printMenu();
+    }
 }
 

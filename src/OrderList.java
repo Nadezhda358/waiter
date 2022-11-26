@@ -76,7 +76,7 @@ public class OrderList {
         }
     }
 
-    public void SaveOrderListToFile(String fileName, Menu menu) throws FileNotFoundException {
+    public void saveOrderListToFile(String fileName, Menu menu) throws FileNotFoundException {
         PrintStream fileWriter = new PrintStream(fileName);
         for (Order order : this.orders) {
             if (order.getStatus() == OrderStatus.PAYED) {
