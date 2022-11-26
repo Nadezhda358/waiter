@@ -110,4 +110,21 @@ public class OrderTest {
         int expectedValue = orderList.orders.get(2).getOrderedItems().size()+1;
         assertEquals(expectedValue, actualValue);
     }
+    @Test
+    public void testIsOrderItemAdded() {
+        Menu menu = new Menu("NewMenu.csv");
+        OrderList orderList = new OrderList("NewOrders.csv",menu);
+        OrderItem orderItemToAdd = new OrderItem(menu.getDishItemByNumber(2),2);
+        int actualValue = orderList.orders.get(0).getOrderedItems().get(0).getCount();
+        orderList.orders.get(0).addOrderedItem(orderItemToAdd);
+        int expectedValue = orderList.orders.get(0).getOrderedItems().get(0).getCount() -2;
+        assertEquals(expectedValue, actualValue);
+    }
+    @Test
+    public void testIsOrderPrinted() {
+        Menu menu = new Menu("NewMenu.csv");
+        OrderList orderList = new OrderList("NewOrders.csv",menu);
+        Order order = orderList.orders.get(0);
+        order.printOrder();
+    }
 }

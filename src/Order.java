@@ -92,7 +92,6 @@ public class Order {
         }
         System.out.println("--------------------------------------------------------");
         System.out.printf("%-40sTotal: %.2f lv.\n", "", totalOrderSum);
-
     }
 
     public void changeStatusWaiter() {
@@ -108,7 +107,6 @@ public class Order {
             setStatus(OrderStatus.PAYED);
             printOrderBill();
             this.orderedItems = new ArrayList<>();
-
         } else {
             System.out.println("You can't change the status of that order.");
         }

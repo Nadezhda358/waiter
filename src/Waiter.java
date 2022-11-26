@@ -127,7 +127,7 @@ public class Waiter extends User{
                 if (tableNumber <= restaurant.getTablesCount()) {
                     if (restaurant.orderList.orders.get(tableNumber - 1).getStatus() == OrderStatus.PAYED) {
                         restaurant.orderList.orders.get(tableNumber - 1).setStatus(OrderStatus.TAKING);
-                        restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                        restaurant.orderList.SaveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                         editOrder(restaurant, (Math.abs(tableNumber) - 1));
                     } else {
                         System.out.println("That table is already taken.");
@@ -175,7 +175,7 @@ public class Waiter extends User{
                     System.out.print("Enter portions count: ");
                     int portionsCount = scan.nextInt();
                     restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDishItemByNumber(dishNumber), portionsCount));
-                    restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                    restaurant.orderList.SaveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                     editOrder(restaurant, orderNumber);
                 }else{
                     System.out.println("The order is already taken. You can't add dishes to it.");
@@ -190,7 +190,7 @@ public class Waiter extends User{
                     System.out.print("Enter count: ");
                     int drinkCount = scan.nextInt();
                     restaurant.orderList.orders.get(orderNumber).addOrderedItem(new OrderItem(restaurant.menu.getDrinkItemByNumber(drinkNumber), drinkCount));
-                    restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                    restaurant.orderList.SaveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                     editOrder(restaurant, orderNumber);
                 }else{
                     System.out.println("The order is already taken. You can't add drinks to it.");
@@ -210,7 +210,7 @@ public class Waiter extends User{
                     }
                     restaurant.orderList.orders.get(orderNumber).deleteOrderedItem(itemNumber);
                     System.out.println("The item was deleted.");
-                    restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                    restaurant.orderList.SaveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                     editOrder(restaurant, orderNumber);
                 }else{
                     System.out.println("The order is already taken. You can't remove items from it.");
@@ -220,7 +220,7 @@ public class Waiter extends User{
             case 4 -> {
                 //restaurant.orderList.PrintWaiterOrderListToChangeStatus();
                 restaurant.orderList.orders.get(orderNumber).changeStatusWaiter();
-                restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
+                restaurant.orderList.SaveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                 editOrder(restaurant, orderNumber);
             }
             case 5 -> printOrdersMenu(restaurant);
