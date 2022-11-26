@@ -5,9 +5,9 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         Restaurant restaurant = new Restaurant();
-        restaurant.menu.printMenu();
-        restaurant.orderList.PrintOrderList();
-        //Login.printStartMenu(restaurant);
+        //restaurant.menu.printMenu();
+        //restaurant.orderList.PrintOrderList();
+        Login.printStartMenu(restaurant);
         //Checks when deletes order item with more, then one counts
         //int table= 5;
         //Order currentOrder = restaurant.orderList.orders.get(table-1);

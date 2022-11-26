@@ -49,27 +49,19 @@ public class Login {
     public static void signUp(String userInfo, Restaurant restaurant){
         if (!isNameTaken(userInfo, restaurant)) {
             try {
-                FileWriter myWriter = new FileWriter("usersInfo.txt", true);
+                FileWriter myWriter = new FileWriter(restaurant.usersInfoFileName, true);
                 myWriter.append(userInfo).append("\n");
                 myWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //addUser(userInfo, restaurant);
-            restaurant.setUsers();
+            restaurant.addUser(userInfo, restaurant);
+            //restaurant.setUsers();
         }else {
             System.out.println("That username is already taken. Try again.");
             signUp(getUserInfo(), restaurant);
         }
     }
-    //public static void addUser(String userInfo, Restaurant restaurant){
-    //    String[] splitUserInfo = userInfo.split(",");
-    //    switch (splitUserInfo[2]) {
-    //        case "cook" -> restaurant.users.add(new Cook(splitUserInfo[0], splitUserInfo[1], Role.COOK));
-    //        case "waiter" -> restaurant.users.add(new Waiter(splitUserInfo[0], splitUserInfo[1], Role.WAITER));
-    //    }
-//
-    //}
     public static boolean isNameTaken(String userInfo, Restaurant restaurant){
         String[] splitUserInfo = userInfo.split(",");
         for (int i = 0; i < restaurant.users.size(); i++){

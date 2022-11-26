@@ -13,12 +13,8 @@ public class Waiter extends User{
         System.out.print("Enter your choice(1-3): ");
         int choice = scan.nextInt();
         switch (choice) {
-            case 1 -> {
-                restaurant.menu.printMenu();
-                editMenu(restaurant);
-            }
+            case 1 -> editMenu(restaurant);
             case 2 -> {
-                restaurant.orderList.PrintOrderList();
                 try {
                     printOrdersMenu(restaurant);
                 } catch (FileNotFoundException e) {
@@ -34,35 +30,39 @@ public class Waiter extends User{
     }
     public void editMenu(Restaurant restaurant){
         Scanner scan = new Scanner(System.in);
-        System.out.println("\n1.1 add new dish\n1.2 add new drink\n1.3 remove dish\n1.4 remove drink\n1.5 back");
-        System.out.print("Enter your choice(1-5): ");
+        System.out.println("\n1. Print menu\n2. Add new dish\n3. Add new drink\n4. Remove dish\n5. Remove drink\n6. Back");
+        System.out.print("Enter your choice(1-6): ");
         int choice = scan.nextInt();
         switch (choice) {
             case 1 -> {
+                restaurant.menu.printMenu();
+                editMenu(restaurant);
+            }
+            case 2 -> {
                 restaurant.menu.addDishItem(readDish());
                 restaurant.menu.saveMenuToFile(restaurant.menuFileName);
                 editMenu(restaurant);
             }
-            case 2 -> {
+            case 3 -> {
                 restaurant.menu.addDrinkItem(readDrink());
                 restaurant.menu.saveMenuToFile(restaurant.menuFileName);
                 editMenu(restaurant);
             }
-            case 3 -> {
+            case 4 -> {
                 System.out.print("Enter dish number: ");
                 int dishNumber = scan.nextInt();
                 restaurant.menu.deleteDishItemByNumber(Math.abs(dishNumber));
                 restaurant.menu.saveMenuToFile(restaurant.menuFileName);
                 editMenu(restaurant);
             }
-            case 4 -> {
+            case 5 -> {
                 System.out.print("Enter drink number: ");
                 int drinkNumber = scan.nextInt();
                 restaurant.menu.deleteDrinkItemByNumber(Math.abs(drinkNumber));
                 restaurant.menu.saveMenuToFile(restaurant.menuFileName);
                 editMenu(restaurant);
             }
-            case 5 -> {
+            case 6 -> {
                 System.out.println();
                 display(restaurant);
             }
@@ -116,12 +116,19 @@ public class Waiter extends User{
     }
     public void printOrdersMenu(Restaurant restaurant) throws FileNotFoundException {
         Scanner scan = new Scanner(System.in);
-        System.out.println("\n2.1 add order\n2.2 edit order\n2.3 back");
-        System.out.print("Enter your choice(1-3): ");
+        System.out.println("\n1. Print all orders\n2. Print orders, which status you can change\n3. Add order\n4. Edit order\n5. Back");
+        System.out.print("Enter your choice(1-5): ");
         int choice = scan.nextInt();
         int tableNumber;
         switch (choice) {
             case 1 -> {
+                restaurant.orderList.PrintOrderList();
+                printOrdersMenu(restaurant);
+            }
+            case 2 -> {
+                restaurant.orderList.PrintWaiterOrderListToChangeStatus();
+                printOrdersMenu(restaurant);}
+            case 3 -> {
                 System.out.print("Enter table number: ");
                 tableNumber = scan.nextInt();
                 if (tableNumber <= restaurant.getTablesCount()) {
@@ -138,8 +145,7 @@ public class Waiter extends User{
                     printOrdersMenu(restaurant);
                 }
             }
-            //printOrdersMenu(restaurant); break;
-            case 2 -> {
+            case 4 -> {
                 System.out.print("Witch table's order do you want to edit?\nEnter the number: ");
                 tableNumber = scan.nextInt();
                 if (tableNumber <= restaurant.getTablesCount()) {
@@ -154,7 +160,7 @@ public class Waiter extends User{
                     printOrdersMenu(restaurant);
                 }
             }
-            case 3 -> display(restaurant);
+            case 5 -> display(restaurant);
             default -> {
                 System.out.println("Invalid input. Try again.\n");
                 printOrdersMenu(restaurant);
@@ -163,7 +169,7 @@ public class Waiter extends User{
     }
     public void editOrder(Restaurant restaurant, int orderNumber) throws FileNotFoundException {
         Scanner scan = new Scanner(System.in);
-        System.out.println("\n1 add dish to order\n2 add drink to order\n3 delete item from order\n4 change status\n5 back");
+        System.out.println("\n1. Add dish to order\n2. Add drink to order\n3. Delete item from order\n4. Change status\n5. Back");
         System.out.print("Enter your choice(1-5): ");
         int choice = scan.nextInt();
         switch (choice) {
@@ -218,7 +224,6 @@ public class Waiter extends User{
                 }
             }
             case 4 -> {
-                //restaurant.orderList.PrintWaiterOrderListToChangeStatus();
                 restaurant.orderList.orders.get(orderNumber).changeStatusWaiter();
                 restaurant.orderList.saveOrderListToFile(restaurant.orderListFileName, restaurant.menu);
                 editOrder(restaurant, orderNumber);

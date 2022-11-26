@@ -103,7 +103,7 @@ public class Order {
     public void changeStatusWaiter() {
         if (getStatus().equals(OrderStatus.PAYED)) {
             System.out.println("There is no order from that table.");
-        } else if (getStatus().equals(OrderStatus.TAKING)) {
+        } else if (getStatus().equals(OrderStatus.TAKING) && orderedItems.size() > 0) {
             setStatus(OrderStatus.TAKEN);
             System.out.println("The order is taken.");
         } else if (getStatus().equals(OrderStatus.COOKED)) {
@@ -113,7 +113,6 @@ public class Order {
             setStatus(OrderStatus.PAYED);
             printOrderBill();
             this.orderedItems = new ArrayList<>();
-
         } else {
             System.out.println("You can't change the status of that order.");
         }
