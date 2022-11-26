@@ -4,7 +4,7 @@ public class Main {
         Restaurant restaurant = new Restaurant();
         restaurant.menu.printMenu();
         restaurant.orderList.printOrderList();
-        Login.printStartMenu(restaurant);
+        //Login.printStartMenu(restaurant);
 
     }
 }
