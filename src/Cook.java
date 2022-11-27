@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class Cook extends User{
     public Cook(String username, String password, Role role) {
@@ -12,7 +11,7 @@ public class Cook extends User{
         int choice = readNumber("Enter your choice(1-3): ");
         switch (choice) {
             case 1 -> {
-                restaurant.orderList.PrintCookOrderList();
+                restaurant.orderList.printCookOrderList();
                 display(restaurant);
             }
             case 2 -> {

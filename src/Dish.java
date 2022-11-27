@@ -1,6 +1,6 @@
 public class Dish extends MenuItem {
-    private DishType dishType;
-    private int weightInGrams;
+    private final DishType dishType;
+    private final int weightInGrams;
 
     public Dish(String name, double price, DishType dishType, int weightInGrams) {
         super(name, price);

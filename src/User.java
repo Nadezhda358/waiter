@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public abstract class User implements Displayable{
-    private String username;
-    private String password;
-    private Role role;
+    private final String username;
+    private final String password;
+    private final Role role;
     public String getUsername() {
         return username;
     }

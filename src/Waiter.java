@@ -108,11 +108,11 @@ public class Waiter extends User{
         int tableNumber;
         switch (choice) {
             case 1 -> {
-                restaurant.orderList.PrintOrderList();
+                restaurant.orderList.printOrderList();
                 printOrdersMenu(restaurant);
             }
             case 2 -> {
-                restaurant.orderList.PrintWaiterOrderListToChangeStatus();
+                restaurant.orderList.printWaiterOrderList();
                 printOrdersMenu(restaurant);}
             case 3 -> {
                 tableNumber = readNumber("Enter table number: ");
